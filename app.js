@@ -158,8 +158,12 @@ async function loadData() {
     setupEventListeners();
 }
 
-// Helper: get the question pool for a test
+// Update getTestQuestionPool to filter by tags if present
 function getTestQuestionPool(test) {
+    // If tags are present, filter questions by tags
+    if (Array.isArray(test.tags) && test.tags.length > 0) {
+        return questions.filter(q => Array.isArray(q.tags) && q.tags.some(tag => test.tags.includes(tag)));
+    }
     if (test.questionPool === 'all') return questions;
     // If it's an array of IDs, map to question objects
     if (Array.isArray(test.questionPool)) {
@@ -184,11 +188,15 @@ function renderWelcomePage() {
     tests.forEach((test, idx) => {
         const pool = getTestQuestionPool(test);
         const numInTest = Object.values(test.questions).reduce((a, b) => a + b, 0);
+        const tagsHtml = (Array.isArray(test.tags) && test.tags.length > 0)
+            ? `<div class="test-card-tags">${test.tags.map(tag => `<span class='test-tag'>${tag}</span>`).join('')}</div>`
+            : '';
         const card = document.createElement('div');
         card.className = 'test-card';
         card.tabIndex = 0;
         card.innerHTML = `
             <div class="test-card-title">${test.name}</div>
+            ${tagsHtml}
             <div class="test-card-desc">${test.description || ''}</div>
             <div class="test-card-questions">${numInTest} out of ${pool.length} questions</div>
         `;
@@ -809,6 +817,18 @@ function showFeedback(question) {
     elements.feedbackResult.className = `feedback-result ${isCorrect ? 'correct' : 'incorrect'}`;
     elements.feedbackResult.textContent = isCorrect ? 'Correct!' : 'Incorrect';
     elements.explanation.innerHTML = formatWithCodeSpans(question.explanation);
+
+    // Show docs links if present
+    const docsSectionId = 'question-docs-section';
+    let docsHtml = '';
+    if (Array.isArray(question.docs) && question.docs.length > 0) {
+        docsHtml = `<ul id="${docsSectionId}" class="question-docs-list" style="margin-top: 12px; text-align: left;">` +
+            question.docs.map(doc => `<li><a href="${doc.url}" target="_blank" rel="noopener noreferrer">${doc.label}</a></li>`).join('') +
+            '</ul>';
+    }
+    if (docsHtml) {
+        elements.explanation.innerHTML += docsHtml;
+    }
 
     // Update visual feedback on options
     if (question.type === 'SINGLE_CHOICE') {

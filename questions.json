@@ -12,7 +12,24 @@
         "5m"
       ],
       "explanation": "Range vectors require a duration in square brackets. The format is `[5m]` for 5 minutes, `[1h]` for 1 hour, etc. This creates a range vector containing all samples within the specified time window.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Official Docs: Query Examples",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/examples/"
+        },
+        {
+          "label": "SigNoz Guide: Creating Range Vectors in Prometheus",
+          "url": "https://signoz.io/guides/generating-range-vectors-from-return-values-in-prometheus-queries/"
+        },
+        {
+          "label": "SigNoz Guide: Instant Vector vs Range Vector in Prometheus",
+          "url": "https://signoz.io/guides/prometheus-instant-vector-vs-range-vector/"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "74505cc8-8d39-4740-8276-65ba759095cd",
@@ -40,7 +57,24 @@
         "117becf5-b917-4fbd-91af-3c93a7d43457"
       ],
       "explanation": "An instant vector selector returns a single sample value for each time series at a given timestamp. Options with `[5m]` are range vectors, and functions return processed vectors.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Querying Basics (latest)",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/"
+        },
+        {
+          "label": "PromLabs Blog: Selecting Data in PromQL",
+          "url": "https://promlabs.com/blog/2020/07/02/selecting-data-in-promql/"
+        },
+        {
+          "label": "Chronosphere: Understanding PromQL and Its Quirks",
+          "url": "https://chronosphere.io/learn/understanding-promql-and-its-quirks/"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "02173c1d-d0c9-4859-9652-676caf4c0dd4",
@@ -68,7 +102,24 @@
         "50e4490c-ce64-4208-ab63-993ac5746cb6"
       ],
       "explanation": "The square brackets `[5m]` indicate a range vector, which contains multiple samples over a time period. Instant vectors have no brackets and return single samples.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Querying Examples",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/examples/"
+        },
+        {
+          "label": "Prometheus Docs: Range Vector Selectors",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#range-vector-selectors"
+        },
+        {
+          "label": "VictoriaMetrics Blog: Instant Queries and Range Queries Explained",
+          "url": "https://victoriametrics.com/blog/prometheus-monitoring-instant-range-query/"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "6ffd4dfb-6640-4198-8758-10ba8f6540c2",
@@ -96,7 +147,20 @@
         "ca36eac3-a322-467c-854f-b6f8fec29858"
       ],
       "explanation": "The `=` operator performs exact string matching. `=~` is for regex matching, `!=` for negative exact matching, and `!~` for negative regex matching.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Label Matching Operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#label-matching-operators"
+        },
+        {
+          "label": "Zabbix Documentation: Prometheus Label Operators",
+          "url": "https://www.zabbix.com/documentation/current/en/manual/config/items/itemtypes/prometheus#label_matching_operators"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "89fa6453-d8cb-40d5-82cf-3a8748269624",
@@ -131,7 +195,20 @@
         "8ce7a24f-f548-46fc-90cb-4f2bd551fa2f"
       ],
       "explanation": "PromQL supports four main data types: instant vectors (single samples), range vectors (samples over time), scalars (floating-point numbers), and string literals. Boolean is not a native PromQL data type.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Grafana Blog: PromQL Data Types",
+          "url": "https://grafana.com/blog/2020/02/04/introduction-to-promql-the-prometheus-query-language/#data-types"
+        },
+        {
+          "label": "OpsRamp Guide: PromQL Data Types",
+          "url": "https://www.opsramp.com/guides/prometheus-monitoring/promql/#data-types"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "ae02d4a4-1cc4-425b-bfaf-5b02665457aa",
@@ -159,7 +236,20 @@
         "6f137fdf-f681-4757-91fd-02e5bf6a1861"
       ],
       "explanation": "The `rate()` function calculates the per-second average rate of increase over a specified time window. It's designed for counter metrics and handles counter resets automatically.",
-      "difficulty": "ADVANCED"
+      "docs": [
+        {
+          "label": "PromLabs Blog: How PromQL Calculates Rates",
+          "url": "https://promlabs.com/blog/2021/01/29/how-exactly-does-promql-calculate-rates/#rate-function-mechanics"
+        },
+        {
+          "label": "Last9 Guide: rate() vs. irate()",
+          "url": "https://last9.io/blog/prometheus-rate-function/#rate-vs-irate-when-to-use-each"
+        }
+      ],
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "cec49ce0-46da-47e0-b903-bbfb3f956dfc",
@@ -173,7 +263,20 @@
         "0.95"
       ],
       "explanation": "`histogram_quantile()` requires a quantile value between `0` and 1. `0.95` represents the 95th percentile. The function works with histogram buckets grouped by the `le` (less than or equal) label.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Histograms and Summaries",
+          "url": "https://prometheus.io/docs/practices/histograms/#quantiles"
+        },
+        {
+          "label": "Last9 Guide: Advanced rate() Patterns",
+          "url": "https://last9.io/blog/prometheus-rate-function/#advanced-applications-of-rate"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "0a5b483a-abc4-43b1-9f3e-d3acf89182e6",
@@ -201,7 +304,20 @@
         "a2804d85-458a-463d-a092-af01d7cd54af"
       ],
       "explanation": "`topk(5, metric)` returns the 5 highest values from the input vector. `max` returns only the single highest value, while `sum` adds all values together.",
-      "difficulty": "ADVANCED"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Aggregation Operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        },
+        {
+          "label": "Last9 Guide: Top Consumer Patterns",
+          "url": "https://last9.io/blog/prometheus-rate-function/#common-advanced-patterns"
+        }
+      ],
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "f315911c-e328-4167-8d19-32cf81c0ce0b",
@@ -235,7 +351,20 @@
         "2353c08e-39a3-415a-9e14-48b3547617f0"
       ],
       "explanation": "`rate()`, `irate()`, and `increase()` are specifically designed for counter metrics that monotonically increase. They handle counter resets and extrapolation. `avg()` and `sum()` work with any numeric metrics.",
-      "difficulty": "ADVANCED"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Counter Metrics",
+          "url": "https://prometheus.io/docs/concepts/metric_types/#counter"
+        },
+        {
+          "label": "Last9 Guide: rate() vs. increase()",
+          "url": "https://last9.io/blog/prometheus-rate-function/#rate-vs-increase"
+        }
+      ],
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "b792633b-0273-4341-b902-7faf604ea948",
@@ -263,7 +392,16 @@
         "4edf811d-e5d8-490a-a406-c439d8b77b91"
       ],
       "explanation": "The offset modifier shifts the evaluation time backward. For example, `metric offset 5m` evaluates the metric as it was 5 minutes ago, not at the current time.",
-      "difficulty": "ADVANCED"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Offset Modifier",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#offset-modifier"
+        }
+      ],
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "9230b87e-0264-4e24-a19b-ede9f68b7f41",
@@ -277,7 +415,16 @@
         "status"
       ],
       "explanation": "The `by` clause specifies which labels to preserve in aggregation. Using `by (status)` groups results by status code while removing other labels like instance. This creates one time series per status code.",
-      "difficulty": "ADVANCED"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Aggregation Basics",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        }
+      ],
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "84838ef5-e88e-4985-a096-12006a5b74c8",
@@ -305,7 +452,16 @@
         "593a623d-b81a-45c7-ac0f-f896442de691"
       ],
       "explanation": "The bool modifier changes comparison behavior. Without bool, comparisons filter results (keeping only matching series). With bool, all series are returned with values 1 (true) or 0 (false).",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Comparison Operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#comparison-binary-operators"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "07264283-9fa2-419f-b418-4179e7a5f7a1",
@@ -321,7 +477,16 @@
         "1m"
       ],
       "explanation": "Subquery syntax is `[range:resolution]`. `[30m:1m]` evaluates the inner query every 1 minute over the past 30 minutes. `max_over_time` then finds the maximum value from those evaluations.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Subqueries",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/examples/#subquery"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "e88234e2-2cea-4d30-bfd4-f9d9e456983e",
@@ -349,7 +514,20 @@
         "5b11040d-47d2-48be-b56b-5033640acbd1"
       ],
       "explanation": "`rate()` calculates the per-second average rate over the entire time window using all samples. `irate()` calculates the instantaneous rate using only the last two samples, providing more sensitivity to recent changes.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: irate() vs. rate()",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#irate"
+        },
+        {
+          "label": "Last9 Blog: rate() vs. irate()",
+          "url": "https://last9.io/blog/prometheus-rate-function/#rate-vs-irate-when-to-use-each"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "3ca26cd6-719b-43c8-9f08-fef13aab3e4e",
@@ -384,7 +562,16 @@
         "1aaebebd-95ec-4537-b9bc-be3f07893432"
       ],
       "explanation": "Vector matching requires identical labels by default. `on()` and `ignoring()` modify matching behavior. `group_left`/`group_right` enable many-to-one/one-to-many matching. Vector matching works with all binary operators, not just arithmetic.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Vector Matching",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#vector-matching"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "11494b1f-86f0-446f-9152-82ac321dc3ee",
@@ -398,7 +585,16 @@
         "rate"
       ],
       "explanation": "CPU utilization = `100 * (1 - idle_rate)`. Only `rate()` is needed to convert counter to per-second rate. The `avg by (instance)` already provides the average, so no outer function is required.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: rate() Function",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "af84e76c-9f47-4dde-90d8-60dee8050a49",
@@ -426,7 +622,16 @@
         "717a8cee-507b-4837-93f5-26dbf973031e"
       ],
       "explanation": "The `@` modifier evaluates a query at a specific point in time using Unix timestamp. For example, `metric @ 1609459200` evaluates the metric at that exact timestamp instead of the current time.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: @ Modifier",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#-modifier"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "1ff4bd49-1431-430a-8bf2-14880dc04946",
@@ -454,7 +659,16 @@
         "86dc8e38-c3b4-499f-bd99-f97d5642bf30"
       ],
       "explanation": "`irate()` should be applied before aggregation because it needs to detect counter resets in individual time series. Aggregating first can hide resets, leading to incorrect rate calculations.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: irate() Function",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#irate"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "d7ea59ce-0505-432a-be18-4cd1e219fbab",
@@ -468,7 +682,16 @@
         "!~"
       ],
       "explanation": "The `!~` operator performs negative regex matching. `status!~\"4..\"` excludes all status codes matching the pattern 4xx (400, 401, 404, etc.). The pattern `\"4..\"` matches any three-character string starting with 4.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Regex Matching",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#regular-expressions"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "6705b431-24c9-4ea9-a98e-4069dc4bf253",
@@ -496,7 +719,16 @@
         "68a50e84-fba9-4f4b-9ba8-47db8378919b"
       ],
       "explanation": "`absent()` returns a vector with value 1 when the input vector is empty (metric doesn't exist), and returns nothing when the input vector has data. It's useful for alerting on missing metrics.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus Docs: absent() Function",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#absent"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "c4f1c6b3-6615-49c7-be97-49d1b126ccdf",
@@ -524,7 +756,20 @@
         "c282ec61-4fc1-40af-b5ab-d87e130c76a3"
       ],
       "explanation": "`increase()` calculates the absolute increase in a counter metric over the specified time window. Unlike `rate()`, it doesn't normalize to per-second values.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: increase() Function",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#increase"
+        },
+        {
+          "label": "Last9: Counter Metrics Guide",
+          "url": "https://last9.io/blog/prometheus-rate-function/#faqs"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "b5bc605a-bbd7-4c47-b76b-63ec19c4a483",
@@ -538,7 +783,16 @@
         "avg_over_time"
       ],
       "explanation": "`avg_over_time()` calculates the average value of all samples in a range vector over the specified time window.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Aggregation Over Time",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#aggregation_over_time"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "a1eadff4-3beb-41a3-97ae-9bd9161b1a79",
@@ -566,7 +820,16 @@
         "1639e4d7-2a90-4c53-b149-6b1d3de19873"
       ],
       "explanation": "Histograms are ideal for measuring latency as they provide distribution information, allowing calculation of percentiles and SLA compliance monitoring.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "Prometheus Docs: Metric Types",
+          "url": "https://prometheus.io/docs/concepts/metric_types/#histogram"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "e6887d86-af66-4bde-a177-65646a9402e6",
@@ -594,7 +857,20 @@
         "7b14c7af-ec03-4a4c-bfb7-fcdd109fa4dc"
       ],
       "explanation": "The `or` operator combines results from different vector operands, useful for creating union of metrics from different sources or fallback scenarios.",
-      "difficulty": "BASIC"
+      "docs": [
+        {
+          "label": "PromQL operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/"
+        },
+        {
+          "label": "PromQL OR operator",
+          "url": "https://signoz.io/guides/how-to-correctly-use-or-logical-operator-in-prometheus/"
+        }
+      ],
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "bff61adf-b2b9-46bf-964b-8c45941b9fb5",
@@ -608,7 +884,16 @@
         "count"
       ],
       "explanation": "`count()` aggregation function returns the number of elements in the input vector. Combined with a filter, it counts matching instances.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#aggregation_over_time"
+        }
+      ]
     },
     {
       "id": "5dc12c4d-dd28-43e5-9620-6e5ca8d2e96a",
@@ -636,7 +921,16 @@
         "79d0fe3a-9b46-4294-86c9-5b0265436c0b"
       ],
       "explanation": "`deriv()` calculates the per-second derivative of a gauge metric using linear regression, showing the rate of change.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#deriv"
+        }
+      ]
     },
     {
       "id": "d7ff6c1d-c4f1-44e8-bb6c-713a7daeb100",
@@ -664,7 +958,16 @@
         "4906c77b-8202-4852-afa6-d599cc5c9e5b"
       ],
       "explanation": "`changes()` returns the number of times a time series value has changed within the given time range.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#changes"
+        }
+      ]
     },
     {
       "id": "6529523f-938f-4437-aa1c-085539bbb68e",
@@ -678,7 +981,16 @@
         "min_over_time"
       ],
       "explanation": "`min_over_time()` returns the minimum value of all samples in the specified time range.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#aggregation_over_time"
+        }
+      ]
     },
     {
       "id": "a5833e85-a70c-4ca3-a998-ef156dc01cd6",
@@ -691,7 +1003,7 @@
         },
         {
           "id": "eea7b01d-9471-4825-b5ba-df00f48a4e5e",
-          "label": "`quantile(0.5, ...)`"
+          "label": "`histogram_quantile(0.5, ...)`"
         },
         {
           "id": "524a9892-f4b5-4ee3-9ee5-f29e10666b1e",
@@ -705,8 +1017,17 @@
       "correctAnswers": [
         "eea7b01d-9471-4825-b5ba-df00f48a4e5e"
       ],
-      "explanation": "`quantile(0.5, ...)` calculates the median (50th percentile) of the input values, which is the middle value when sorted.",
-      "difficulty": "BASIC"
+      "explanation": "`histogram_quantile(0.5, ...)` calculates the median (50th percentile) of the input values, which is the middle value when sorted.",
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#histogram_quantile"
+        }
+      ]
     },
     {
       "id": "f0cc0d34-ab41-462c-988b-cfe9ad298ad0",
@@ -734,7 +1055,16 @@
         "192fdd8d-821b-438c-b366-b55475ccda30"
       ],
       "explanation": "Range vectors use square brackets with duration inside: `[2h]` for 2 hours, `[30m]` for 30 minutes, etc.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL range vector selectors",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#range-vector-selectors"
+        }
+      ]
     },
     {
       "id": "d68dba6c-1e34-4d93-b449-b805d41250af",
@@ -748,7 +1078,16 @@
         "!="
       ],
       "explanation": "The `!=` operator excludes time series where the specified label has the given value.",
-      "difficulty": "BASIC"
+      "difficulty": "BASIC",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL label matchers",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#time-series-selectors"
+        }
+      ]
     },
     {
       "id": "c7730502-8a64-4b50-af01-1a3cf939a336",
@@ -776,7 +1115,20 @@
         "495db81c-8ade-4694-b518-df0bb0a28b57"
       ],
       "explanation": "Range vector selectors automatically ignore staleness markers and collect all available samples within the time window.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL range vector selectors",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#range-vector-selectors"
+        },
+        {
+          "label": "PromQL staleness",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#staleness"
+        }
+      ]
     },
     {
       "id": "d6552020-d6ca-42ca-9f14-564a19ab5e37",
@@ -790,7 +1142,16 @@
         "60"
       ],
       "explanation": "Since `rate()` returns per-second values, multiply by 60 to get per-minute rates.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ]
     },
     {
       "id": "c53bf797-b4e8-4b96-8abf-fd1529b7b259",
@@ -818,7 +1179,16 @@
         "002d39df-554c-4328-808f-dc7ec35a9569"
       ],
       "explanation": "`label_join()` combines multiple label values into a new label using a specified separator.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#label_join"
+        }
+      ]
     },
     {
       "id": "888dfa87-f656-4d8f-b796-f2e1ed3b598a",
@@ -846,7 +1216,16 @@
         "ac08e734-ac85-4bb4-82f6-36741806c73b"
       ],
       "explanation": "When no histogram data exists, `histogram_quantile()` returns an empty result (no time series).",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#histogram_quantile"
+        }
+      ]
     },
     {
       "id": "ceda7fcb-81e7-4048-abfa-fd02f2cf0d08",
@@ -860,7 +1239,20 @@
         "rate"
       ],
       "explanation": "Recording rules should use descriptive names and pre-calculate expensive operations like `rate()` for reuse in dashboards and alerts.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "Prometheus recording rules",
+          "url": "https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/"
+        },
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ]
     },
     {
       "id": "52b62a44-702e-40a5-9eff-bb2dabe9cdd3",
@@ -888,7 +1280,16 @@
         "d2b6226a-d88d-4d5c-9be7-64954bce355a"
       ],
       "explanation": "`predict_linear()` uses linear regression to extrapolate future metric values based on historical trends.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#predict_linear"
+        }
+      ]
     },
     {
       "id": "cb63eeb8-9cc2-4b2d-813b-df72a4b6645d",
@@ -916,7 +1317,16 @@
         "2b4d7ae3-9ae6-4780-95eb-ad1fd4822488"
       ],
       "explanation": "`without()` excludes the specified labels from aggregation grouping, keeping all other labels.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        }
+      ]
     },
     {
       "id": "c946a5ee-305b-4ac8-bc5f-9befc289d25c",
@@ -930,7 +1340,20 @@
         "<"
       ],
       "explanation": "Alert conditions use comparison operators. Here `< 10` triggers when available disk space percentage falls below 10%.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "Prometheus alert rules",
+          "url": "https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/"
+        },
+        {
+          "label": "PromQL operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/"
+        }
+      ]
     },
     {
       "id": "a0078eba-a589-4983-8b40-ad6e3839d37a",
@@ -958,7 +1381,16 @@
         "556285b1-292f-477d-ae76-3fc0d2b9eced"
       ],
       "explanation": "The `or` operator can fill gaps by providing fallback values: `metric or 0` returns 0 when metric has no data.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/"
+        }
+      ]
     },
     {
       "id": "c1a9fd1d-fbac-4daa-945f-632fb4deae83",
@@ -986,7 +1418,16 @@
         "d0d2d2df-6fbf-413c-85b2-b3169ac5bc7c"
       ],
       "explanation": "`group()` aggregation returns 1 for each group of time series, effectively counting unique label combinations while ignoring values.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        }
+      ]
     },
     {
       "id": "1f3d9395-a270-4db0-bc6e-b01454508de5",
@@ -1000,7 +1441,16 @@
         "rate"
       ],
       "explanation": "Error rate percentage = (error_requests_rate / total_requests_rate) * 100. Both numerator and denominator need the same `rate()` function.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ]
     },
     {
       "id": "8c0feec0-409a-4faf-a9bc-c4fb488e02f5",
@@ -1028,7 +1478,16 @@
         "366f845e-08b2-496a-8e71-9f2f0a08116f"
       ],
       "explanation": "`group_right` enables one-to-many matching where the right-hand side has multiple series matching each left-hand side series.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL many-to-one and one-to-many matching",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#many-to-one-and-one-to-many-vector-matches"
+        }
+      ]
     },
     {
       "id": "784c90d7-3d54-4e2b-82b1-7ed2b5541cf2",
@@ -1056,7 +1515,16 @@
         "7927cb7a-791b-4be1-ad03-be7a7bca336d"
       ],
       "explanation": "`resets()` counts the number of times a counter metric has reset (decreased) within the specified time range.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#resets"
+        }
+      ]
     },
     {
       "id": "d39bd7b2-52cb-4447-9c7d-e3ee6a90dade",
@@ -1070,7 +1538,16 @@
         ">"
       ],
       "explanation": "Use the `>` operator to filter for memory usage percentage above 80%.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/"
+        }
+      ]
     },
     {
       "id": "06137083-f25d-4710-9c75-40aac8302669",
@@ -1098,7 +1575,16 @@
         "5f64e4cd-0c78-4759-bb8e-15b1dd4bd55a"
       ],
       "explanation": "`time()` returns the current Unix timestamp as a scalar value.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#time"
+        }
+      ]
     },
     {
       "id": "0aff9406-5e22-4bd3-b3b1-b8991ac50953",
@@ -1126,7 +1612,16 @@
         "cbc92df8-3939-42ea-aaf4-14c5e94102c0"
       ],
       "explanation": "`sum()` aggregates values across multiple time series at a single point in time, while `sum_over_time()` sums all samples in a range vector for each series.",
-      "difficulty": "ADVANCED"
+      "difficulty": "ADVANCED",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        }
+      ]
     },
     {
       "id": "93f38f99-1b45-4e50-a520-e9a507e47d6d",
@@ -1139,10 +1634,19 @@
       ],
       "correctAnswers": [
         "1h",
-        "5m"
+      "5m"
       ],
       "explanation": "Subquery syntax `[range:step]` where `1h` is the time range and `5m` is the evaluation step interval.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL subqueries",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/basics/#subquery"
+        }
+      ]
     },
     {
       "id": "53552199-4a62-4833-8b50-8cfce7eea362",
@@ -1170,7 +1674,16 @@
         "49b15422-0508-4d5a-b034-2ffe15bfb2d8"
       ],
       "explanation": "`ignoring()` is preferred for reusable rules as it preserves more labels, making rules more generic and shareable across different contexts.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL matching operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#vector-matching"
+        }
+      ]
     },
     {
       "id": "74c235cd-c38a-40c2-828a-4ef36742149a",
@@ -1198,7 +1711,16 @@
         "dbd07f9e-04bf-4687-9294-c69d1d796cac"
       ],
       "explanation": "Always use the built-in `rate()` function as it properly handles counter resets automatically. Manual calculations are error-prone.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ]
     },
     {
       "id": "0dd56f68-179e-4a15-97e9-75d525b49715",
@@ -1212,7 +1734,20 @@
         "rate"
       ],
       "explanation": "For histogram quantiles, use `rate()` on bucket counters, then aggregate by service and `le` label before applying `histogram_quantile()`.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#histogram_quantile"
+        },
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate"
+        }
+      ]
     },
     {
       "id": "2cd99e95-948a-4247-b248-2f692a8e9e7b",
@@ -1240,7 +1775,16 @@
         "77e9bd25-a053-42e7-92b7-05c831ad6049"
       ],
       "explanation": "`absent_over_time()` returns 1 when no samples exist in the specified time range, useful for detecting when metrics stop reporting.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#absent_over_time"
+        }
+      ]
     },
     {
       "id": "1731abc5-f996-4809-b535-8785f037ed70",
@@ -1268,7 +1812,16 @@
         "38d9c120-e2be-448a-82a1-8f1975866e12"
       ],
       "explanation": "Recording rules with pre-aggregated data provide the most efficient approach for frequently-accessed multi-core CPU calculations.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "Prometheus recording rules",
+          "url": "https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/"
+        }
+      ]
     },
     {
       "id": "c1aad0ca-cbcb-4cf9-800d-8e648291fd2e",
@@ -1282,7 +1835,16 @@
         ">"
       ],
       "explanation": "This query counts time series per metric name and filters for those with more than 1000 series, helping identify cardinality issues.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL aggregation operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#aggregation-operators"
+        }
+      ]
     },
     {
       "id": "4eab0e6c-6f34-4972-b99f-56d03c506433",
@@ -1310,7 +1872,16 @@
         "0430d0e8-2d44-4f4d-a64e-c086dee5f9db"
       ],
       "explanation": "Use `ignoring()` to exclude conflicting labels and `group_left()` to preserve additional labels from the right-hand side in many-to-one joins.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL many-to-one and one-to-many vector matches",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/#many-to-one-and-one-to-many-vector-matches"
+        }
+      ]
     },
     {
       "id": "3bb574c3-a39b-43c0-a56f-111cb13dc1d7",
@@ -1338,7 +1909,16 @@
         "83243768-9113-4c82-bb66-4ee8a3827428"
       ],
       "explanation": "`predict_linear()` assumes linear trends and may not accurately predict metrics with seasonal patterns, exponential growth, or other non-linear behaviors.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#predict_linear"
+        }
+      ]
     },
     {
       "id": "012a7a23-3f2b-4355-bfe5-1fdb2581cac9",
@@ -1354,7 +1934,20 @@
         "5m"
       ],
       "explanation": "SLA alerts should use appropriate thresholds (0.5 = 500ms) and duration (5m) to avoid false positives while catching genuine violations.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "Prometheus alert rules",
+          "url": "https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/"
+        },
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#histogram_quantile"
+        }
+      ]
     },
     {
       "id": "52ea8386-181c-4bbe-b93d-b2c8adcd1c7d",
@@ -1382,7 +1975,16 @@
         "28f3cf5e-f367-4f4e-8028-568c3c06f2c6"
       ],
       "explanation": "Using `metric or 0` provides sensible default values for sparse metrics, ensuring consistent dashboard visualization without gaps.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL operators",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/operators/"
+        }
+      ]
     },
     {
       "id": "07c79a76-acd9-4c1c-a536-f52c4169a219",
@@ -1410,7 +2012,20 @@
         "822ca777-77b5-42fc-8b7e-3eb1b89dc685"
       ],
       "explanation": "Recording rules on each federation side provide pre-aggregated data, reducing query complexity and improving performance for cross-federation scenarios.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "Prometheus federation",
+          "url": "https://prometheus.io/docs/prometheus/latest/federation/"
+        },
+        {
+          "label": "Prometheus recording rules",
+          "url": "https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/"
+        }
+      ]
     },
     {
       "id": "4dce559e-2f57-49b9-b31c-7d63893ed8dc",
@@ -1424,7 +2039,16 @@
         "deriv"
       ],
       "explanation": "`deriv()` calculates the rate of change in memory usage; positive derivatives over time may indicate memory leaks (1048576 = 1MB/second).",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ],
+      "docs": [
+        {
+          "label": "PromQL functions",
+          "url": "https://prometheus.io/docs/prometheus/latest/querying/functions/#deriv"
+        }
+      ]
     },
     {
       "id": "dbcd22eb-e150-43f4-ba95-0ba4337a2c67",
@@ -1452,9 +2076,18 @@
         "fba8a451-4b55-4be0-a140-6f5c8076c55d"
       ],
       "explanation": "Exponential buckets better capture wide latency distributions, providing good resolution for both fast and slow requests.",
-      "difficulty": "EXPERT"
+      "docs": [
+        {
+          "label": "Prometheus histograms and summaries",
+          "url": "https://prometheus.io/docs/concepts/metric_types/#histogram"
+        }
+      ],
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
-    {
+        {
       "id": "3bea42fb-e23e-4ebc-9e6a-8bcb3a885652",
       "text": "What causes 'many-to-many matching not allowed' errors?",
       "type": "SINGLE_CHOICE",
@@ -1480,7 +2113,10 @@
         "716f4af0-449b-4161-8598-9abfbfd795bb"
       ],
       "explanation": "Many-to-many errors occur when both sides have multiple matching series. Use `group_left` or `group_right` to specify which side is the 'many' side.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "3a53d119-332d-4a57-a759-72050ba7ace3",
@@ -1494,7 +2130,10 @@
         "node_network_speed_bytes"
       ],
       "explanation": "Network utilization = (transmitted_bits_per_second / interface_speed_bits_per_second) * 100. Multiply bytes by 8 to get bits.",
-      "difficulty": "EXPERT"
+      "difficulty": "EXPERT",
+      "tags": [
+        "PromQL"
+      ]
     },
     {
       "id": "e083d335-8a47-4f70-b849-7fd3d7b95004",
@@ -1522,44 +2161,9 @@
         "9e4498d2-10af-4c14-8a01-c73e8a71d282"
       ],
       "explanation": "Recording rules with multiple aggregation levels (sum, avg, quantiles) preserve the most information while providing efficient access to different views.",
-      "difficulty": "EXPERT"
-    },
-    {
-      "id": "f14e0e93-ad66-4a83-8c23-74f4d68d5657",
-      "text": "What is the correct way to handle timezone-aware queries?",
-      "type": "SINGLE_CHOICE",
-      "options": [
-        {
-          "id": "08fd4097-f971-46ec-9f6f-5c5dad1c0dab",
-          "label": "Use `@` modifier with timezone offset"
-        },
-        {
-          "id": "e5ad387e-c155-481c-b92a-0fed36a051a0",
-          "label": "Convert timestamps in recording rules"
-        },
-        {
-          "id": "a417eaaf-c6b0-40a6-8a78-d63bb5067533",
-          "label": "PromQL uses UTC only, handle in visualization"
-        },
-        {
-          "id": "9d7a400e-a9d8-42f1-bb50-68b716520525",
-          "label": "Use external time conversion functions"
-        }
-      ],
-      "correctAnswers": [
-        "a417eaaf-c6b0-40a6-8a78-d63bb5067533"
-      ],
-      "explanation": "PromQL and the Prometheus time series database operate strictly in Coordinated Universal Time (UTC). This ensures consistency in data storage, querying, and alerting, regardless of server or user locations. The `@` modifier, for example, expects a Unix timestamp which is UTC-based. Consequently, any timezone conversions required for human-readable display (e.g., to a user's local time or a specific business timezone) must be handled by client applications, such as Grafana or other visualization layers, rather than within PromQL itself.",
       "difficulty": "EXPERT",
-      "docs": [
-        {
-          "link": "https://prometheus.io/docs/prometheus/latest/querying/basics/#time-stamps-and-time-zones",
-          "label": "PromQL: Timestamps and Time Zones"
-        },
-        {
-          "link": "https://prometheus.io/docs/prometheus/latest/querying/basics/#-modifier",
-          "label": "PromQL: @ Modifier (Usage with Unix timestamps)"
-        }
+      "tags": [
+        "PromQL"
       ]
     },
     {
@@ -1581,7 +2185,7 @@
           "label": "PromQL Functions: rate()"
         },
         {
-          "link": "https://prometheus.io/docs/prometheus/latest/querying/functions/#avg_over_time",
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/functions/#aggregation_over_time",
           "label": "PromQL Functions: avg_over_time()"
         },
         {
@@ -1592,6 +2196,9 @@
           "link": "https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/#defining-alerting-rules",
           "label": "Defining Alerting Rules (Context for such queries)"
         }
+      ],
+      "tags": [
+        "PromQL"
       ]
     },
     {
@@ -1634,6 +2241,9 @@
           "link": "https://prometheus.io/docs/introduction/overview/#when-does-it-not-fit",
           "label": "Prometheus Overview: When it does not fit (Mentions high cardinality)"
         }
+      ],
+      "tags": [
+        "PromQL"
       ]
     }
   ]

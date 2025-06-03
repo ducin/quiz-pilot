@@ -1284,26 +1284,53 @@ body {
 
 .test-list {
   display: flex;
-  flex-direction: column;
-  gap: var(--space-16);
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--space-24);
   margin-top: var(--space-16);
   align-items: stretch;
+  justify-content: flex-start;
 }
 
 .test-list .test-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-base);
-  padding: var(--space-16) var(--space-24);
+  padding: var(--space-20) var(--space-32);
   box-shadow: var(--shadow-xs);
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  min-width: 260px;
-  max-width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 320px;
+  max-width: 480px;
   width: 100%;
   cursor: pointer;
   transition: border-color 0.2s, box-shadow 0.2s;
+  margin-bottom: 0;
+  flex: 1 1 320px;
+}
+
+@media (min-width: 900px) {
+  .test-list {
+    justify-content: flex-start;
+  }
+  .test-list .test-card {
+    max-width: 480px;
+    min-width: 340px;
+    flex: 1 1 340px;
+  }
+}
+
+@media (max-width: 768px) {
+  .test-list {
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+  .test-list .test-card {
+    min-width: 180px;
+    max-width: 100%;
+    padding: var(--space-16) var(--space-16);
+  }
 }
 
 .test-card.selected {
@@ -1316,8 +1343,30 @@ body {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-semibold);
   color: var(--color-primary);
-  margin-bottom: 0;
+  margin-bottom: var(--space-8);
   margin-right: var(--space-16);
+}
+
+.test-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-8);
+  margin-bottom: var(--space-8);
+}
+
+.test-tag {
+  display: inline-block;
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  padding: 2px 12px;
+  font-size: var(--font-size-xs);
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  border: 1px solid var(--color-primary);
+  margin-right: 0;
+  margin-bottom: 0;
+  transition: background 0.2s, color 0.2s;
 }
 
 .test-card-desc {
@@ -1328,7 +1377,7 @@ body {
 }
 
 .test-card-questions {
-  margin-left: auto;
+  margin-top: var(--space-8);
   font-size: var(--font-size-sm);
   color: var(--color-info);
   font-weight: var(--font-weight-medium);

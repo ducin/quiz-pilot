@@ -1,24 +1,26 @@
 [
     {
         "id": "b1e7e2c2-1f2a-4c3e-9e2b-1a2b3c4d5e6f",
-        "name": "PromQL test",
+        "name": "PromQL FULL test",
         "questionPool": "all",
         "questions": {
             "BASIC": 5,
             "ADVANCED": 5,
             "EXPERT": 5
         },
+        "tags": ["PromQL"],
         "description": "A comprehensive test of your PromQL knowledge."
     },
     {
         "id": "a6b7e2c2-9e2b-1f2a-4c3e-1a2b3c4d5e6f",
-        "name": "PromQL test (SHORT)",
+        "name": "PromQL BASICS test",
         "questionPool": "all",
         "questions": {
-            "BASIC": 1,
-            "ADVANCED": 1,
-            "EXPERT": 1
+            "BASIC": 15,
+            "ADVANCED": 0,
+            "EXPERT": 0
         },
-        "description": "A short test of your PromQL knowledge."
+        "tags": ["PromQL"],
+        "description": "A test of your PromQL knowledge basics."
     }
 ]

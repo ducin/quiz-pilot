@@ -7,41 +7,44 @@ function processQuestions(inputPath, outputPath) {
     const questionsData = JSON.parse(data);
     
     const processedQuestions = questionsData.questions.map(question => {
-        // For CODE_COMPLETION, return early without modifying options or correctAnswers
-        if (question.type === 'CODE_COMPLETION') {
-            return {
-                ...question,
-                id: uuidv4(),
-            };
-        }
+        // // For CODE_COMPLETION, return early without modifying options or correctAnswers
+        // if (question.type === 'CODE_COMPLETION') {
+        //     return {
+        //         ...question,
+        //         id: uuidv4(),
+        //     };
+        // }
 
-        // Generate new question ID
-        const newQuestionId = uuidv4();
+        // // Generate new question ID
+        // const newQuestionId = uuidv4();
         
-        // Process options and create ID mapping
-        const optionIdMap = new Map();
+        // // Process options and create ID mapping
+        // const optionIdMap = new Map();
 
-        const processedOptions = question.options.map(option => {
-            const newOptionId = uuidv4();
-            optionIdMap.set(option.id, newOptionId);
-            return { ...option, id: newOptionId };
-        });
+        // const processedOptions = question.options.map(option => {
+        //     const newOptionId = uuidv4();
+        //     optionIdMap.set(option.id, newOptionId);
+        //     return { ...option, id: newOptionId };
+        // });
 
-        // Update correct answers with new IDs
-        const newCorrectAnswers = question.correctAnswers.map(oldId => {
-            const newId = optionIdMap.get(oldId);
-            if (!newId) throw new Error(`Missing option ID mapping for ${oldId}`);
-            return newId;
-        });
+        // // Update correct answers with new IDs
+        // const newCorrectAnswers = question.correctAnswers.map(oldId => {
+        //     const newId = optionIdMap.get(oldId);
+        //     if (!newId) throw new Error(`Missing option ID mapping for ${oldId}`);
+        //     return newId;
+        // });
 
-        return {
-            ...question,
-            id: newQuestionId,
-            options: processedOptions,
-            correctAnswers: question.type === 'SINGLE_CHOICE' 
-                ? [newCorrectAnswers[0]] 
-                : newCorrectAnswers
-        };
+        question.tags = ['promql'];
+
+        // return {
+        //     ...question,
+        //     id: newQuestionId,
+        //     options: processedOptions,
+        //     correctAnswers: question.type === 'SINGLE_CHOICE' 
+        //         ? [newCorrectAnswers[0]] 
+        //         : newCorrectAnswers
+        // };
+        return question;
     });
 
     // Write output file
