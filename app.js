@@ -46,6 +46,31 @@ const elements = {
     startTestBtn: document.getElementById('startTestBtn')
 };
 
+const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+};
+
+// Helper function to filter and shuffle questions by difficulty
+function getShuffledQuestionsByDifficulty(questions, difficulty, count) {
+    const filteredQuestions = questions.filter(q => q.difficulty === difficulty);
+    return shuffleArray(filteredQuestions).slice(0, count);
+}
+
+// Function to randomize questions based on test definition
+function getRandomizedQuestions(testDefinition, questions) {
+    const { BASIC, ADVANCED, EXPERT } = testDefinition.questions;
+    return {
+        BASIC: getShuffledQuestionsByDifficulty(questions, 'BASIC', BASIC),
+        ADVANCED: getShuffledQuestionsByDifficulty(questions, 'ADVANCED', ADVANCED),
+        EXPERT: getShuffledQuestionsByDifficulty(questions, 'EXPERT', EXPERT)
+    };
+}
+
+
 // Theme Management
 function initTheme() {
     // Check if user has a saved theme preference
@@ -127,6 +152,7 @@ async function loadData() {
     ]);
     questions = questionsRes.questions;
     tests = testsRes;
+    loadExecutions();
     document.getElementById('loadingSpinner').style.display = 'none';
     renderWelcomePage();
     setupEventListeners();
@@ -204,7 +230,8 @@ function getExecutionAnswers() {
 function showExecutionReview(execution) {
     // Find the test and questions
     const test = tests.find(t => t.id === execution.testId);
-    const testQuestions = test.questionIds.map(qid => questions.find(q => q.id === qid)).filter(Boolean);
+    // Use the stored question IDs from the execution
+    const testQuestions = (execution.questionIds || []).map(qid => questions.find(q => q.id === qid)).filter(Boolean);
     // Modal container
     let modal = document.getElementById('reviewModal');
     if (!modal) {
@@ -316,6 +343,7 @@ function renderExecutionSummary() {
         const div = document.createElement('div');
         div.className = 'execution-history-item';
         div.innerHTML = `
+            <button class="history-delete-btn" title="Remove this entry" aria-label="Remove" data-exec-id="${exec.id}">&times;</button>
             <div class="execution-history-title">${test ? test.name : 'Unknown Test'}</div>
             <div class="execution-history-meta">
                 <span>${new Date(exec.timestamp).toLocaleString()}</span>
@@ -323,7 +351,20 @@ function renderExecutionSummary() {
             </div>
         `;
         div.style.cursor = 'pointer';
-        div.onclick = () => showExecutionReview(exec);
+        div.onclick = (e) => {
+            // Prevent click if X button is clicked
+            if (e.target.classList.contains('history-delete-btn')) return;
+            showExecutionSummaryView(exec);
+        };
+        // Add delete handler
+        const deleteBtn = div.querySelector('.history-delete-btn');
+        deleteBtn.onclick = (e) => {
+            e.stopPropagation();
+            // Remove this execution from appState and localStorage
+            appState.executions = appState.executions.filter(x => x.id !== exec.id);
+            saveExecutions();
+            renderExecutionSummary();
+        };
         elements.executionHistoryList.appendChild(div);
     });
 }
@@ -483,9 +524,9 @@ function showSummary() {
     elements.totalScore.textContent = `${appState.score} / ${testQuestions.length} (${Math.round((appState.score / testQuestions.length) * 100)}%)`;
     // Display difficulty breakdown (always show 0 / N)
     const allDiffs = Object.keys(scores);
-    elements.basicScore.textContent = scores.Basic ? `${scores.Basic.correct} / ${scores.Basic.total}` : '0 / 0';
-    elements.advancedScore.textContent = scores.Advanced ? `${scores.Advanced.correct} / ${scores.Advanced.total}` : '0 / 0';
-    elements.expertScore.textContent = scores.Expert ? `${scores.Expert.correct} / ${scores.Expert.total}` : '0 / 0';
+    elements.basicScore.textContent = scores.BASIC ? `${scores.BASIC.correct} / ${scores.BASIC.total}` : '0 / 0';
+    elements.advancedScore.textContent = scores.ADVANCED ? `${scores.ADVANCED.correct} / ${scores.ADVANCED.total}` : '0 / 0';
+    elements.expertScore.textContent = scores.EXPERT ? `${scores.EXPERT.correct} / ${scores.EXPERT.total}` : '0 / 0';
     // Display missed questions (index, not hash)
     if (missedQuestions.length > 0) {
         elements.missedQuestionsList.innerHTML = '';
@@ -501,14 +542,15 @@ function showSummary() {
     } else {
         elements.missedQuestions.style.display = 'none';
     }
-    // Store execution in localStorage, including answers
+    // Store execution in localStorage, including answers and question IDs
     appState.executions.push({
         id: appState.testExecutionId,
         testId: appState.selectedTest.id,
         timestamp: Date.now(),
         score: appState.score,
         total: testQuestions.length,
-        answers: getExecutionAnswers()
+        answers: getExecutionAnswers(),
+        questionIds: testQuestions.map(q => q.id) // Store the actual question IDs for review
     });
     saveExecutions();
     renderExecutionSummary();
@@ -822,6 +864,76 @@ function toggleSubmitNextButtons(showNext) {
     } else {
         elements.submitBtn.style.display = 'inline-flex';
         elements.nextBtn.style.display = 'none';
+    }
+}
+
+// Add a function to show the summary view for a past execution
+function showExecutionSummaryView(execution) {
+    // Hide other containers
+    elements.welcomeContainer.style.display = 'none';
+    elements.questionContainer.style.display = 'none';
+    elements.navigationControls.style.display = 'none';
+    elements.summaryContainer.style.display = 'block';
+    elements.executionSummary.style.display = 'block';
+    elements.progressFill.parentElement.style.display = 'none';
+    elements.progressText.style.display = 'none';
+
+    // Get the questions for this execution
+    const testQuestions = (execution.questionIds || []).map(qid => questions.find(q => q.id === qid)).filter(Boolean);
+    // Dynamically initialize scores for all difficulties present
+    const scores = {};
+    testQuestions.forEach(q => {
+        if (!scores[q.difficulty]) scores[q.difficulty] = { correct: 0, total: 0 };
+    });
+    const missedQuestions = [];
+    testQuestions.forEach((question, idx) => {
+        if (!scores[question.difficulty]) scores[question.difficulty] = { correct: 0, total: 0 };
+        scores[question.difficulty].total++;
+        // Use the stored answers for validation
+        const userAnswer = execution.answers && execution.answers.userAnswers && execution.answers.userAnswers[question.id];
+        let isCorrect = false;
+        if (execution.answers && execution.answers.submitted && execution.answers.submitted[question.id]) {
+            if (question.type === 'SINGLE_CHOICE') {
+                isCorrect = question.correctAnswers.includes(userAnswer);
+            } else if (question.type === 'MULTIPLE_CHOICE') {
+                if (Array.isArray(userAnswer)) {
+                    const sortedUser = [...userAnswer].sort();
+                    const sortedCorrect = [...question.correctAnswers].sort();
+                    isCorrect = sortedUser.length === sortedCorrect.length && sortedUser.every((val, i) => val === sortedCorrect[i]);
+                }
+            } else if (question.type === 'CODE_COMPLETION') {
+                if (Array.isArray(userAnswer)) {
+                    isCorrect = userAnswer.every((a, i) => a && a.trim().toLowerCase() === question.correctAnswers[i].toLowerCase());
+                }
+            }
+        }
+        if (isCorrect) {
+            scores[question.difficulty].correct++;
+        } else {
+            missedQuestions.push({question, idx});
+        }
+    });
+    // Display total score
+    elements.totalScore.textContent = `${execution.score} / ${testQuestions.length} (${Math.round((execution.score / testQuestions.length) * 100)}%)`;
+    // Display difficulty breakdown
+    elements.basicScore.textContent = scores.BASIC ? `${scores.BASIC.correct} / ${scores.BASIC.total}` : '0 / 0';
+    elements.advancedScore.textContent = scores.ADVANCED ? `${scores.ADVANCED.correct} / ${scores.ADVANCED.total}` : '0 / 0';
+    elements.expertScore.textContent = scores.EXPERT ? `${scores.EXPERT.correct} / ${scores.EXPERT.total}` : '0 / 0';
+    // Display missed questions
+    if (missedQuestions.length > 0) {
+        elements.missedQuestionsList.innerHTML = '';
+        missedQuestions.forEach(({question, idx}) => {
+            const missedDiv = document.createElement('div');
+            missedDiv.className = 'missed-question-item';
+            missedDiv.innerHTML = `
+                <div class="missed-question-title">Question ${idx+1}: ${question.text}</div>
+                <div class="missed-question-explanation">${question.explanation}</div>
+            `;
+            elements.missedQuestionsList.appendChild(missedDiv);
+        });
+        elements.missedQuestions.style.display = 'block';
+    } else {
+        elements.missedQuestions.style.display = 'none';
     }
 }
 

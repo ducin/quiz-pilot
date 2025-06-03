@@ -9,5 +9,16 @@
             "EXPERT": 5
         },
         "description": "A comprehensive test of your PromQL knowledge."
+    },
+    {
+        "id": "a6b7e2c2-9e2b-1f2a-4c3e-1a2b3c4d5e6f",
+        "name": "PromQL test (SHORT)",
+        "questionPool": "all",
+        "questions": {
+            "BASIC": 1,
+            "ADVANCED": 1,
+            "EXPERT": 1
+        },
+        "description": "A short test of your PromQL knowledge."
     }
 ]

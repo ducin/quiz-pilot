@@ -1549,22 +1549,50 @@
       "correctAnswers": [
         "a417eaaf-c6b0-40a6-8a78-d63bb5067533"
       ],
-      "explanation": "PromQL operates in UTC only. Timezone handling should be done in visualization tools like Grafana, not in PromQL queries.",
-      "difficulty": "EXPERT"
+      "explanation": "PromQL and the Prometheus time series database operate strictly in Coordinated Universal Time (UTC). This ensures consistency in data storage, querying, and alerting, regardless of server or user locations. The `@` modifier, for example, expects a Unix timestamp which is UTC-based. Consequently, any timezone conversions required for human-readable display (e.g., to a user's local time or a specific business timezone) must be handled by client applications, such as Grafana or other visualization layers, rather than within PromQL itself.",
+      "difficulty": "EXPERT",
+      "docs": [
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/basics/#time-stamps-and-time-zones",
+          "label": "PromQL: Timestamps and Time Zones"
+        },
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/basics/#-modifier",
+          "label": "PromQL: @ Modifier (Usage with Unix timestamps)"
+        }
+      ]
     },
     {
       "id": "4bf21303-0297-4e63-9bf6-13e38a741bed",
       "text": "Complete the query to detect when error rate exceeds baseline by 3x:",
       "type": "CODE_COMPLETION",
-      "template": "`rate(http_requests_total{status=~\"5..\"}[5m]) > ______ * avg_over_time(rate(http_requests_total{status=~\"5..\"}[5m])[24h:1h])`",
+      "template": "rate(http_requests_total{status=~\"5..\"}[5m]) > ______ * avg_over_time(rate(http_requests_total{status=~\"5..\"}[5m])[24h:1h])",
       "gaps": [
         "3"
       ],
       "correctAnswers": [
         "3"
       ],
-      "explanation": "This compares current error rate to 3x the 24-hour baseline average, detecting anomalous spikes above normal patterns.",
-      "difficulty": "EXPERT"
+      "explanation": "This query is designed to detect significant deviations from normal error rates. The `rate(http_requests_total{status=~\"5..\"}[5m])` part calculates the current per-second rate of 5xx server errors over the most recent 5-minute window. The `avg_over_time(rate(http_requests_total{status=~\"5..\"}[5m])[24h:1h])` part establishes a dynamic baseline by first calculating the 5-minute error rate, then sampling this rate once per hour over the past 24 hours, and finally averaging these samples. The query triggers (returns series where the condition is true) if the current error rate is more than three times this historical baseline, indicating an anomalous spike.",
+      "difficulty": "EXPERT",
+      "docs": [
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/functions/#rate",
+          "label": "PromQL Functions: rate()"
+        },
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/functions/#avg_over_time",
+          "label": "PromQL Functions: avg_over_time()"
+        },
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/querying/basics/#subquery",
+          "label": "PromQL: Subqueries"
+        },
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/configuration/alerting_rules/#defining-alerting-rules",
+          "label": "Defining Alerting Rules (Context for such queries)"
+        }
+      ]
     },
     {
       "id": "6269c93a-db09-4eba-b1b7-6f6b4a280064",
@@ -1591,8 +1619,22 @@
       "correctAnswers": [
         "1e290e27-08f6-401c-b48b-9b00d61c8852"
       ],
-      "explanation": "Recording rules that drop high-cardinality labels (like user_id, request_id) while preserving essential grouping labels provide the best balance of utility and performance.",
-      "difficulty": "EXPERT"
+      "explanation": "The most effective and common strategy for managing high-cardinality label explosion is to use recording rules. These rules allow you to aggregate metrics and selectively drop problematic, high-cardinality labels (e.g., `user_id`, `request_id`, `pod_hash`) while preserving essential grouping labels. This pre-computes summarized time series that are much more performant for dashboards and general alerting. While the original high-cardinality data might still be scraped, it's queried less frequently. Hashing labels makes them unreadable and difficult to use meaningfully. Sampling metrics reduces overall data volume but doesn't inherently solve the cardinality issue for the labels that remain. Using separate metric names can be part of a broader strategy but doesn't, by itself, eliminate a high-cardinality label if it's still attached to the new metric.",
+      "difficulty": "EXPERT",
+      "docs": [
+        {
+          "link": "https://prometheus.io/docs/prometheus/latest/configuration/recording_rules/",
+          "label": "Recording Rules (Aggregating & Dropping Labels)"
+        },
+        {
+          "link": "https://prometheus.io/docs/practices/instrumentation/#do-not-overuse-labels",
+          "label": "Best Practices: Avoiding High Cardinality in Instrumentation"
+        },
+        {
+          "link": "https://prometheus.io/docs/introduction/overview/#when-does-it-not-fit",
+          "label": "Prometheus Overview: When it does not fit (Mentions high cardinality)"
+        }
+      ]
     }
   ]
 }

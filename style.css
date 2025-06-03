@@ -1423,3 +1423,67 @@ body {
     left: 0;
   }
 }
+
+/* Layout: align summary and history horizontally */
+.app-main {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 32px;
+  position: relative;
+}
+
+.summary-container {
+  flex: 1 1 0;
+  margin-top: 0 !important;
+}
+
+.execution-summary {
+  position: static;
+  margin-left: 32px;
+  min-width: 260px;
+  max-width: 320px;
+  top: 0;
+  right: 0;
+  z-index: 10;
+}
+
+/* X button for test history delete */
+.history-delete-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  background: transparent;
+  border: none;
+  color: var(--color-error);
+  font-size: 1.2em;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: 50%;
+  transition: background 0.15s, color 0.15s;
+  z-index: 2;
+  line-height: 1;
+}
+.history-delete-btn:hover, .history-delete-btn:focus {
+  background: var(--color-error);
+  color: #fff;
+  outline: none;
+}
+
+.execution-history-item {
+  position: relative;
+  padding-top: 12px;
+}
+
+@media (max-width: 1024px) {
+  .app-main {
+    flex-direction: column;
+    gap: 0;
+  }
+  .execution-summary {
+    margin-left: 0;
+    margin-top: 24px;
+    max-width: 100%;
+  }
+}
