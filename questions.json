@@ -1,0 +1,1598 @@
+{
+  "questions": [
+    {
+      "id": "f7150658-c229-49b6-a6b4-b00ada5bd0b4",
+      "text": "Complete the query to select HTTP requests over the last 5 minutes:",
+      "type": "CODE_COMPLETION",
+      "template": "`http_requests_total[____]`",
+      "gaps": [
+        "5m"
+      ],
+      "correctAnswers": [
+        "5m"
+      ],
+      "explanation": "Range vectors require a duration in square brackets. The format is `[5m]` for 5 minutes, `[1h]` for 1 hour, etc. This creates a range vector containing all samples within the specified time window.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "74505cc8-8d39-4740-8276-65ba759095cd",
+      "text": "Which of the following is a valid instant vector selector?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "117becf5-b917-4fbd-91af-3c93a7d43457",
+          "label": "`http_requests_total`"
+        },
+        {
+          "id": "a2ef033f-594d-4c7c-8c37-49cca8fda2eb",
+          "label": "`http_requests_total[5m]`"
+        },
+        {
+          "id": "20ce19dd-9671-4f63-a77f-f937170c39ec",
+          "label": "`rate(http_requests_total)`"
+        },
+        {
+          "id": "acea0736-e89a-4db0-95aa-a496132a0fb7",
+          "label": "`sum(http_requests_total[5m])`"
+        }
+      ],
+      "correctAnswers": [
+        "117becf5-b917-4fbd-91af-3c93a7d43457"
+      ],
+      "explanation": "An instant vector selector returns a single sample value for each time series at a given timestamp. Options with `[5m]` are range vectors, and functions return processed vectors.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "02173c1d-d0c9-4859-9652-676caf4c0dd4",
+      "text": "What type of vector does `http_requests_total[5m]` return?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "61c0ff61-d08a-4e8e-a8d8-38bd9565be67",
+          "label": "Instant vector"
+        },
+        {
+          "id": "50e4490c-ce64-4208-ab63-993ac5746cb6",
+          "label": "Range vector"
+        },
+        {
+          "id": "65fbe5db-fa89-461b-bac0-78d88c115995",
+          "label": "Scalar"
+        },
+        {
+          "id": "882a96b6-87b8-4a41-8e9b-692bdd4a57ad",
+          "label": "String"
+        }
+      ],
+      "correctAnswers": [
+        "50e4490c-ce64-4208-ab63-993ac5746cb6"
+      ],
+      "explanation": "The square brackets `[5m]` indicate a range vector, which contains multiple samples over a time period. Instant vectors have no brackets and return single samples.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "6ffd4dfb-6640-4198-8758-10ba8f6540c2",
+      "text": "Which label matching operator performs exact string matching?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "83ea7509-ac78-4ce1-a38d-7a776002dd9b",
+          "label": "`=~`"
+        },
+        {
+          "id": "3c986d4d-07c4-4185-86b2-a85f510db61e",
+          "label": "`!~`"
+        },
+        {
+          "id": "ca36eac3-a322-467c-854f-b6f8fec29858",
+          "label": "`=`"
+        },
+        {
+          "id": "edec457d-62b9-4591-ac0f-fcbf42139c03",
+          "label": "`!=`"
+        }
+      ],
+      "correctAnswers": [
+        "ca36eac3-a322-467c-854f-b6f8fec29858"
+      ],
+      "explanation": "The `=` operator performs exact string matching. `=~` is for regex matching, `!=` for negative exact matching, and `!~` for negative regex matching.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "89fa6453-d8cb-40d5-82cf-3a8748269624",
+      "text": "Which of the following are valid PromQL data types? (Select all that apply)",
+      "type": "MULTIPLE_CHOICE",
+      "options": [
+        {
+          "id": "d4ff020d-1ae9-4003-bf33-8718011b90b1",
+          "label": "Instant vector"
+        },
+        {
+          "id": "73c64054-8307-4b34-bc77-3f4095776c98",
+          "label": "Range vector"
+        },
+        {
+          "id": "62cd8363-9582-4021-8546-cf6626c47f09",
+          "label": "Scalar"
+        },
+        {
+          "id": "8ce7a24f-f548-46fc-90cb-4f2bd551fa2f",
+          "label": "String literal"
+        },
+        {
+          "id": "061584cb-323a-4894-bc00-948ef9e51159",
+          "label": "Boolean"
+        }
+      ],
+      "correctAnswers": [
+        "d4ff020d-1ae9-4003-bf33-8718011b90b1",
+        "73c64054-8307-4b34-bc77-3f4095776c98",
+        "62cd8363-9582-4021-8546-cf6626c47f09",
+        "8ce7a24f-f548-46fc-90cb-4f2bd551fa2f"
+      ],
+      "explanation": "PromQL supports four main data types: instant vectors (single samples), range vectors (samples over time), scalars (floating-point numbers), and string literals. Boolean is not a native PromQL data type.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "ae02d4a4-1cc4-425b-bfaf-5b02665457aa",
+      "text": "What does the `rate()` function calculate?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "0d2d6984-56b1-4f0c-ab5a-7705e91b0978",
+          "label": "Total increase over time"
+        },
+        {
+          "id": "6f137fdf-f681-4757-91fd-02e5bf6a1861",
+          "label": "Per-second average rate of increase"
+        },
+        {
+          "id": "d493f66d-443d-4e3e-9486-f1ca9989480e",
+          "label": "Instantaneous rate of change"
+        },
+        {
+          "id": "c8368738-a9ac-45b4-8ea3-c87ffc85c456",
+          "label": "Maximum rate observed"
+        }
+      ],
+      "correctAnswers": [
+        "6f137fdf-f681-4757-91fd-02e5bf6a1861"
+      ],
+      "explanation": "The `rate()` function calculates the per-second average rate of increase over a specified time window. It's designed for counter metrics and handles counter resets automatically.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "cec49ce0-46da-47e0-b903-bbfb3f956dfc",
+      "text": "Complete the query to get the 95th percentile of HTTP request duration:",
+      "type": "CODE_COMPLETION",
+      "template": "`histogram_quantile(____, sum(rate(http_request_duration_seconds_bucket[5m])) by (le))`",
+      "gaps": [
+        "0.95"
+      ],
+      "correctAnswers": [
+        "0.95"
+      ],
+      "explanation": "`histogram_quantile()` requires a quantile value between `0` and 1. `0.95` represents the 95th percentile. The function works with histogram buckets grouped by the `le` (less than or equal) label.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "0a5b483a-abc4-43b1-9f3e-d3acf89182e6",
+      "text": "Which aggregation operator would you use to get the top 5 highest values?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "486b14df-c3c0-47ca-83de-f443e35ca032",
+          "label": "`max`"
+        },
+        {
+          "id": "a2804d85-458a-463d-a092-af01d7cd54af",
+          "label": "`topk`"
+        },
+        {
+          "id": "51bd69d2-ec85-454d-af35-261425d96fc6",
+          "label": "`sum`"
+        },
+        {
+          "id": "d3285a2c-ec3c-437f-a5c6-c1f8d3e3f0da",
+          "label": "`count`"
+        }
+      ],
+      "correctAnswers": [
+        "a2804d85-458a-463d-a092-af01d7cd54af"
+      ],
+      "explanation": "`topk(5, metric)` returns the 5 highest values from the input vector. `max` returns only the single highest value, while `sum` adds all values together.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "f315911c-e328-4167-8d19-32cf81c0ce0b",
+      "text": "Which functions should ONLY be used with counter metrics? (Select all that apply)",
+      "type": "MULTIPLE_CHOICE",
+      "options": [
+        {
+          "id": "40c599dc-17b9-4d7c-b316-5ee75bd028dc",
+          "label": "`rate()`"
+        },
+        {
+          "id": "29a43627-51eb-44cb-95ae-9cb54e658293",
+          "label": "`irate()`"
+        },
+        {
+          "id": "2353c08e-39a3-415a-9e14-48b3547617f0",
+          "label": "`increase()`"
+        },
+        {
+          "id": "c0e3eb51-0c44-4251-a0fe-134950ed75da",
+          "label": "`avg()`"
+        },
+        {
+          "id": "9a0d8d89-ddcd-424e-a2f2-7a038c1efcea",
+          "label": "`sum()`"
+        }
+      ],
+      "correctAnswers": [
+        "40c599dc-17b9-4d7c-b316-5ee75bd028dc",
+        "29a43627-51eb-44cb-95ae-9cb54e658293",
+        "2353c08e-39a3-415a-9e14-48b3547617f0"
+      ],
+      "explanation": "`rate()`, `irate()`, and `increase()` are specifically designed for counter metrics that monotonically increase. They handle counter resets and extrapolation. `avg()` and `sum()` work with any numeric metrics.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "b792633b-0273-4341-b902-7faf604ea948",
+      "text": "What does the offset modifier do?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "e2a07204-c2d6-466a-bd0c-ef0973591602",
+          "label": "Changes the evaluation time forward"
+        },
+        {
+          "id": "4edf811d-e5d8-490a-a406-c439d8b77b91",
+          "label": "Changes the evaluation time backward"
+        },
+        {
+          "id": "75e5573f-dae1-4202-9583-b322e676211d",
+          "label": "Modifies the metric name"
+        },
+        {
+          "id": "a0d42a6f-aabd-45b4-a4a6-34b02c7f8cfa",
+          "label": "Filters by time range"
+        }
+      ],
+      "correctAnswers": [
+        "4edf811d-e5d8-490a-a406-c439d8b77b91"
+      ],
+      "explanation": "The offset modifier shifts the evaluation time backward. For example, `metric offset 5m` evaluates the metric as it was 5 minutes ago, not at the current time.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "9230b87e-0264-4e24-a19b-ede9f68b7f41",
+      "text": "Complete the query to sum HTTP requests by status code, excluding the instance label:",
+      "type": "CODE_COMPLETION",
+      "template": "`sum by (____) (http_requests_total)`",
+      "gaps": [
+        "status"
+      ],
+      "correctAnswers": [
+        "status"
+      ],
+      "explanation": "The `by` clause specifies which labels to preserve in aggregation. Using `by (status)` groups results by status code while removing other labels like instance. This creates one time series per status code.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "84838ef5-e88e-4985-a096-12006a5b74c8",
+      "text": "In the query rate(metric[5m]) > bool 0.1, what does the bool modifier do?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "d2408c74-c23b-45f4-a36b-3fa67e8593a3",
+          "label": "Converts the result to boolean values"
+        },
+        {
+          "id": "ee7035ef-763a-4e8d-b530-ab1cfb100168",
+          "label": "Filters out false values"
+        },
+        {
+          "id": "593a623d-b81a-45c7-ac0f-f896442de691",
+          "label": "Returns 1 for true, 0 for false instead of filtering"
+        },
+        {
+          "id": "2bc908d5-7f7b-46da-aa9a-a2008d752e0c",
+          "label": "Makes the comparison case-insensitive"
+        }
+      ],
+      "correctAnswers": [
+        "593a623d-b81a-45c7-ac0f-f896442de691"
+      ],
+      "explanation": "The bool modifier changes comparison behavior. Without bool, comparisons filter results (keeping only matching series). With bool, all series are returned with values 1 (true) or 0 (false).",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "07264283-9fa2-419f-b418-4179e7a5f7a1",
+      "text": "Complete the subquery to get the maximum 5-minute rate over the past 30 minutes with 1-minute resolution:",
+      "type": "CODE_COMPLETION",
+      "template": "`max_over_time(rate(metric[5m])[____:____])`",
+      "gaps": [
+        "30m",
+        "1m"
+      ],
+      "correctAnswers": [
+        "30m",
+        "1m"
+      ],
+      "explanation": "Subquery syntax is `[range:resolution]`. `[30m:1m]` evaluates the inner query every 1 minute over the past 30 minutes. `max_over_time` then finds the maximum value from those evaluations.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "e88234e2-2cea-4d30-bfd4-f9d9e456983e",
+      "text": "What's the difference between `irate()` and `rate()`?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "3a112e04-d3f7-4ea5-9185-8ba4043f1b49",
+          "label": "`irate()` uses all samples, `rate()` uses two samples"
+        },
+        {
+          "id": "5b11040d-47d2-48be-b56b-5033640acbd1",
+          "label": "`rate()` uses all samples, `irate()` uses only the last two samples"
+        },
+        {
+          "id": "3ddb7585-fc66-4ce6-b12c-7d8b9a9f2638",
+          "label": "`irate()` works with gauges, `rate()` works with counters"
+        },
+        {
+          "id": "a22d1fdd-e639-4ab9-926d-f6cec82ef08b",
+          "label": "No difference, they're synonymous"
+        }
+      ],
+      "correctAnswers": [
+        "5b11040d-47d2-48be-b56b-5033640acbd1"
+      ],
+      "explanation": "`rate()` calculates the per-second average rate over the entire time window using all samples. `irate()` calculates the instantaneous rate using only the last two samples, providing more sensitivity to recent changes.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "3ca26cd6-719b-43c8-9f08-fef13aab3e4e",
+      "text": "Which statements about vector matching are correct? (Select all that apply)",
+      "type": "MULTIPLE_CHOICE",
+      "options": [
+        {
+          "id": "c42f2bd3-98f4-454f-b5a5-415d7ecdaa0f",
+          "label": "Vectors must have identical label sets to match"
+        },
+        {
+          "id": "2b240cf0-c1fe-46d2-b36b-3b1079e7f594",
+          "label": "`on()` clause specifies which labels to match on"
+        },
+        {
+          "id": "5ad515c1-0f23-4fee-b77a-41f90cf4555c",
+          "label": "`ignoring()` clause excludes labels from matching"
+        },
+        {
+          "id": "1aaebebd-95ec-4537-b9bc-be3f07893432",
+          "label": "`group_left` allows many-to-one matching"
+        },
+        {
+          "id": "03862af3-fe16-4a72-92a8-4d1efcc37665",
+          "label": "Vector matching only works with arithmetic operators"
+        }
+      ],
+      "correctAnswers": [
+        "c42f2bd3-98f4-454f-b5a5-415d7ecdaa0f",
+        "2b240cf0-c1fe-46d2-b36b-3b1079e7f594",
+        "5ad515c1-0f23-4fee-b77a-41f90cf4555c",
+        "1aaebebd-95ec-4537-b9bc-be3f07893432"
+      ],
+      "explanation": "Vector matching requires identical labels by default. `on()` and `ignoring()` modify matching behavior. `group_left`/`group_right` enable many-to-one/one-to-many matching. Vector matching works with all binary operators, not just arithmetic.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "11494b1f-86f0-446f-9152-82ac321dc3ee",
+      "text": "Complete the query to calculate CPU utilization percentage from idle CPU time:",
+      "type": "CODE_COMPLETION",
+      "template": "`100 * (1 - avg by (instance) (______(node_cpu_seconds_total{mode='idle'}[5m])))`",
+      "gaps": [
+        "rate"
+      ],
+      "correctAnswers": [
+        "rate"
+      ],
+      "explanation": "CPU utilization = `100 * (1 - idle_rate)`. Only `rate()` is needed to convert counter to per-second rate. The `avg by (instance)` already provides the average, so no outer function is required.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "af84e76c-9f47-4dde-90d8-60dee8050a49",
+      "text": "What does the @ modifier do in PromQL?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "5fc3c793-c258-444e-8168-497308d3b7d8",
+          "label": "Creates an alias for the metric"
+        },
+        {
+          "id": "717a8cee-507b-4837-93f5-26dbf973031e",
+          "label": "Evaluates the query at a specific Unix timestamp"
+        },
+        {
+          "id": "96d7b103-29e2-40e1-b0cb-8ab39caa297a",
+          "label": "Adds metadata to the result"
+        },
+        {
+          "id": "d896eefe-732d-40df-b970-1de020e1048a",
+          "label": "Performs aggregation"
+        }
+      ],
+      "correctAnswers": [
+        "717a8cee-507b-4837-93f5-26dbf973031e"
+      ],
+      "explanation": "The `@` modifier evaluates a query at a specific point in time using Unix timestamp. For example, `metric @ 1609459200` evaluates the metric at that exact timestamp instead of the current time.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "1ff4bd49-1431-430a-8bf2-14880dc04946",
+      "text": "In a recording rule, why should you avoid using irate() with aggregation functions?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "f8538ee6-0dd8-4337-a74e-4f9eceae9491",
+          "label": "`irate()` doesn't work with aggregation"
+        },
+        {
+          "id": "1fac9255-3454-45f2-8a34-7591574cab43",
+          "label": "It causes performance issues"
+        },
+        {
+          "id": "86dc8e38-c3b4-499f-bd99-f97d5642bf30",
+          "label": "Counter resets may not be properly handled after aggregation"
+        },
+        {
+          "id": "a366c7eb-9b14-43ec-bdf2-9dad3de906d3",
+          "label": "The syntax is invalid"
+        }
+      ],
+      "correctAnswers": [
+        "86dc8e38-c3b4-499f-bd99-f97d5642bf30"
+      ],
+      "explanation": "`irate()` should be applied before aggregation because it needs to detect counter resets in individual time series. Aggregating first can hide resets, leading to incorrect rate calculations.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "d7ea59ce-0505-432a-be18-4cd1e219fbab",
+      "text": "Complete the query to match HTTP requests excluding 4xx status codes using regex:",
+      "type": "CODE_COMPLETION",
+      "template": "`http_requests_total{status____\"4..\"}`",
+      "gaps": [
+        "!~"
+      ],
+      "correctAnswers": [
+        "!~"
+      ],
+      "explanation": "The `!~` operator performs negative regex matching. `status!~\"4..\"` excludes all status codes matching the pattern 4xx (400, 401, 404, etc.). The pattern `\"4..\"` matches any three-character string starting with 4.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "6705b431-24c9-4ea9-a98e-4069dc4bf253",
+      "text": "What happens when you use `absent()` function?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "857ed2f8-e189-42e9-a317-864a39ed3c60",
+          "label": "Returns 1 if the metric exists, 0 if it doesn't"
+        },
+        {
+          "id": "68a50e84-fba9-4f4b-9ba8-47db8378919b",
+          "label": "Returns 1 if the metric doesn't exist, nothing if it does"
+        },
+        {
+          "id": "8fd933e5-94cb-4ca6-abf3-0ec9c90c441d",
+          "label": "Returns the count of missing metrics"
+        },
+        {
+          "id": "3c460191-28eb-481e-826b-65dd1e8c1654",
+          "label": "Removes the metric from results"
+        }
+      ],
+      "correctAnswers": [
+        "68a50e84-fba9-4f4b-9ba8-47db8378919b"
+      ],
+      "explanation": "`absent()` returns a vector with value 1 when the input vector is empty (metric doesn't exist), and returns nothing when the input vector has data. It's useful for alerting on missing metrics.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "c4f1c6b3-6615-49c7-be97-49d1b126ccdf",
+      "text": "Which function should you use to calculate the absolute increase over a time period?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "5b3e9b7d-3441-4eea-ae35-9e543f85dbc1",
+          "label": "`rate()`"
+        },
+        {
+          "id": "c282ec61-4fc1-40af-b5ab-d87e130c76a3",
+          "label": "`increase()`"
+        },
+        {
+          "id": "be5ddc33-d72f-4973-a58f-53685cfa3467",
+          "label": "`irate()`"
+        },
+        {
+          "id": "a54c38b0-6ffd-45bc-ab6d-e9ceca9b0b2a",
+          "label": "`delta()`"
+        }
+      ],
+      "correctAnswers": [
+        "c282ec61-4fc1-40af-b5ab-d87e130c76a3"
+      ],
+      "explanation": "`increase()` calculates the absolute increase in a counter metric over the specified time window. Unlike `rate()`, it doesn't normalize to per-second values.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "b5bc605a-bbd7-4c47-b76b-63ec19c4a483",
+      "text": "Complete the query to get the average memory usage over the last hour:",
+      "type": "CODE_COMPLETION",
+      "template": "`______(node_memory_used_bytes[1h])`",
+      "gaps": [
+        "avg_over_time"
+      ],
+      "correctAnswers": [
+        "avg_over_time"
+      ],
+      "explanation": "`avg_over_time()` calculates the average value of all samples in a range vector over the specified time window.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "a1eadff4-3beb-41a3-97ae-9bd9161b1a79",
+      "text": "What type of metric should you use for measuring request latency?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "48136315-b9c3-45b1-a87d-c4a2d8e990fa",
+          "label": "Counter"
+        },
+        {
+          "id": "f3a4b443-5293-4f3e-8f51-3a15f94cfa91",
+          "label": "Gauge"
+        },
+        {
+          "id": "1639e4d7-2a90-4c53-b149-6b1d3de19873",
+          "label": "Histogram"
+        },
+        {
+          "id": "a52993aa-0687-46ce-9d2e-bf6772862b55",
+          "label": "Summary"
+        }
+      ],
+      "correctAnswers": [
+        "1639e4d7-2a90-4c53-b149-6b1d3de19873"
+      ],
+      "explanation": "Histograms are ideal for measuring latency as they provide distribution information, allowing calculation of percentiles and SLA compliance monitoring.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "e6887d86-af66-4bde-a177-65646a9402e6",
+      "text": "Which operator would you use to combine metrics from different sources?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "f1234aad-94de-4d8e-acc3-f0f937d24efa",
+          "label": "`and`"
+        },
+        {
+          "id": "7b14c7af-ec03-4a4c-bfb7-fcdd109fa4dc",
+          "label": "`or`"
+        },
+        {
+          "id": "7bf5d24f-9175-42ae-b658-d985bb410e4b",
+          "label": "`unless`"
+        },
+        {
+          "id": "37d3869f-a2b8-4b6e-b471-b2f67f50ba6d",
+          "label": "`+`"
+        }
+      ],
+      "correctAnswers": [
+        "7b14c7af-ec03-4a4c-bfb7-fcdd109fa4dc"
+      ],
+      "explanation": "The `or` operator combines results from different vector operands, useful for creating union of metrics from different sources or fallback scenarios.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "bff61adf-b2b9-46bf-964b-8c45941b9fb5",
+      "text": "Complete the query to count the number of instances currently up:",
+      "type": "CODE_COMPLETION",
+      "template": "`____(up == 1)`",
+      "gaps": [
+        "count"
+      ],
+      "correctAnswers": [
+        "count"
+      ],
+      "explanation": "`count()` aggregation function returns the number of elements in the input vector. Combined with a filter, it counts matching instances.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "5dc12c4d-dd28-43e5-9620-6e5ca8d2e96a",
+      "text": "Which function calculates the derivative of a gauge metric?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "79d0fe3a-9b46-4294-86c9-5b0265436c0b",
+          "label": "`deriv()`"
+        },
+        {
+          "id": "f3cb655b-ec81-409e-ba39-8c871bd5689a",
+          "label": "`rate()`"
+        },
+        {
+          "id": "546bbcfb-6805-4700-8940-fd4239b80cda",
+          "label": "`delta()`"
+        },
+        {
+          "id": "781200a0-e4c3-4ee2-8e22-a1d3b3e247bf",
+          "label": "`predict_linear()`"
+        }
+      ],
+      "correctAnswers": [
+        "79d0fe3a-9b46-4294-86c9-5b0265436c0b"
+      ],
+      "explanation": "`deriv()` calculates the per-second derivative of a gauge metric using linear regression, showing the rate of change.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "d7ff6c1d-c4f1-44e8-bb6c-713a7daeb100",
+      "text": "What does the `changes()` function return?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "4906c77b-8202-4852-afa6-d599cc5c9e5b",
+          "label": "Number of times the value changed"
+        },
+        {
+          "id": "82556d3a-3568-47a2-bfe6-fcc0a3b5ee4e",
+          "label": "Percentage of change"
+        },
+        {
+          "id": "c5918d04-8773-4eed-8a86-71e2ded72ca3",
+          "label": "Rate of change per second"
+        },
+        {
+          "id": "9730b76d-7b14-411c-8ae4-c87b6ed325bf",
+          "label": "Last change timestamp"
+        }
+      ],
+      "correctAnswers": [
+        "4906c77b-8202-4852-afa6-d599cc5c9e5b"
+      ],
+      "explanation": "`changes()` returns the number of times a time series value has changed within the given time range.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "6529523f-938f-4437-aa1c-085539bbb68e",
+      "text": "Complete the query to get the minimum value over the last 10 minutes:",
+      "type": "CODE_COMPLETION",
+      "template": "`______(cpu_usage[10m])`",
+      "gaps": [
+        "min_over_time"
+      ],
+      "correctAnswers": [
+        "min_over_time"
+      ],
+      "explanation": "`min_over_time()` returns the minimum value of all samples in the specified time range.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "a5833e85-a70c-4ca3-a998-ef156dc01cd6",
+      "text": "Which aggregation function would you use to find the middle value?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "692f8cc7-3b6e-41d2-835e-279ff6f97167",
+          "label": "`avg()`"
+        },
+        {
+          "id": "eea7b01d-9471-4825-b5ba-df00f48a4e5e",
+          "label": "`quantile(0.5, ...)`"
+        },
+        {
+          "id": "524a9892-f4b5-4ee3-9ee5-f29e10666b1e",
+          "label": "`stddev()`"
+        },
+        {
+          "id": "762433e7-d2c6-490e-9b8b-7d98d9acb91a",
+          "label": "`median()`"
+        }
+      ],
+      "correctAnswers": [
+        "eea7b01d-9471-4825-b5ba-df00f48a4e5e"
+      ],
+      "explanation": "`quantile(0.5, ...)` calculates the median (50th percentile) of the input values, which is the middle value when sorted.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "f0cc0d34-ab41-462c-988b-cfe9ad298ad0",
+      "text": "What is the correct syntax for a range vector with 2-hour duration?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "495d05bd-94c5-4601-9eb8-1dd84f56c071",
+          "label": "`metric{2h}`"
+        },
+        {
+          "id": "192fdd8d-821b-438c-b366-b55475ccda30",
+          "label": "`metric[2h]`"
+        },
+        {
+          "id": "432d164c-0b05-4743-93e7-4506e93c9442",
+          "label": "`metric(2h)`"
+        },
+        {
+          "id": "aa096152-6458-45d5-921c-a306a67eb5e4",
+          "label": "`metric<2h>`"
+        }
+      ],
+      "correctAnswers": [
+        "192fdd8d-821b-438c-b366-b55475ccda30"
+      ],
+      "explanation": "Range vectors use square brackets with duration inside: `[2h]` for 2 hours, `[30m]` for 30 minutes, etc.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "d68dba6c-1e34-4d93-b449-b805d41250af",
+      "text": "Complete the query to exclude metrics where job label is 'test':",
+      "type": "CODE_COMPLETION",
+      "template": "`http_requests_total{job____\"test\"}`",
+      "gaps": [
+        "!="
+      ],
+      "correctAnswers": [
+        "!="
+      ],
+      "explanation": "The `!=` operator excludes time series where the specified label has the given value.",
+      "difficulty": "BASIC"
+    },
+    {
+      "id": "c7730502-8a64-4b50-af01-1a3cf939a336",
+      "text": "Which function removes staleness markers from results?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "888855ad-1473-4209-85b5-84e0e3fce82c",
+          "label": "`present_over_time()`"
+        },
+        {
+          "id": "978beeb3-b63b-401e-a42e-a887f095d918",
+          "label": "`last_over_time()`"
+        },
+        {
+          "id": "495db81c-8ade-4694-b518-df0bb0a28b57",
+          "label": "Range vector selectors automatically ignore staleness"
+        },
+        {
+          "id": "bac9da3b-4048-4807-8d7f-811cd07872dc",
+          "label": "`absent_over_time()`"
+        }
+      ],
+      "correctAnswers": [
+        "495db81c-8ade-4694-b518-df0bb0a28b57"
+      ],
+      "explanation": "Range vector selectors automatically ignore staleness markers and collect all available samples within the time window.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "d6552020-d6ca-42ca-9f14-564a19ab5e37",
+      "text": "Complete the query to calculate request rate per minute instead of per second:",
+      "type": "CODE_COMPLETION",
+      "template": "`rate(http_requests_total[5m]) * ____`",
+      "gaps": [
+        "60"
+      ],
+      "correctAnswers": [
+        "60"
+      ],
+      "explanation": "Since `rate()` returns per-second values, multiply by 60 to get per-minute rates.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "c53bf797-b4e8-4b96-8abf-fd1529b7b259",
+      "text": "Which label manipulation function would you use to create a new label from existing ones?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "c1e1bdad-545e-463f-8153-80ba763b2293",
+          "label": "`label_replace()`"
+        },
+        {
+          "id": "002d39df-554c-4328-808f-dc7ec35a9569",
+          "label": "`label_join()`"
+        },
+        {
+          "id": "8942ceeb-5822-495a-ad19-4d05ded2feb7",
+          "label": "`label_keep()`"
+        },
+        {
+          "id": "0b979663-e4a0-4fd8-8a5f-318be5c27317",
+          "label": "`label_drop()`"
+        }
+      ],
+      "correctAnswers": [
+        "002d39df-554c-4328-808f-dc7ec35a9569"
+      ],
+      "explanation": "`label_join()` combines multiple label values into a new label using a specified separator.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "888dfa87-f656-4d8f-b796-f2e1ed3b598a",
+      "text": "What is the result of `histogram_quantile(0.99, histogram_bucket)` when no data exists?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "f21665cc-6df0-4e06-a40e-02d1b00e3c7a",
+          "label": "Returns 0"
+        },
+        {
+          "id": "4d329ed7-f4ed-4d57-a5f2-1a9080d0c16c",
+          "label": "Returns NaN"
+        },
+        {
+          "id": "ac08e734-ac85-4bb4-82f6-36741806c73b",
+          "label": "Returns empty result"
+        },
+        {
+          "id": "84acd0d3-3312-458f-8a19-34e9cced6121",
+          "label": "Returns +Inf"
+        }
+      ],
+      "correctAnswers": [
+        "ac08e734-ac85-4bb4-82f6-36741806c73b"
+      ],
+      "explanation": "When no histogram data exists, `histogram_quantile()` returns an empty result (no time series).",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "ceda7fcb-81e7-4048-abfa-fd02f2cf0d08",
+      "text": "Complete the recording rule to pre-calculate 5-minute request rates:",
+      "type": "CODE_COMPLETION",
+      "template": "`record: \"job:http_request_rate5m\"\nexpr: ______(http_requests_total[5m])`",
+      "gaps": [
+        "rate"
+      ],
+      "correctAnswers": [
+        "rate"
+      ],
+      "explanation": "Recording rules should use descriptive names and pre-calculate expensive operations like `rate()` for reuse in dashboards and alerts.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "52b62a44-702e-40a5-9eff-bb2dabe9cdd3",
+      "text": "Which function predicts future values using linear regression?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "d2b6226a-d88d-4d5c-9be7-64954bce355a",
+          "label": "`predict_linear()`"
+        },
+        {
+          "id": "34d28015-c926-4cb2-9daa-5b29eddd6676",
+          "label": "`holt_winters()`"
+        },
+        {
+          "id": "63c1e9cf-5ece-4a0c-988f-bf02dd04665f",
+          "label": "`deriv()`"
+        },
+        {
+          "id": "4c75441f-f188-4893-b3ca-b1820485be9b",
+          "label": "`extrapolate()`"
+        }
+      ],
+      "correctAnswers": [
+        "d2b6226a-d88d-4d5c-9be7-64954bce355a"
+      ],
+      "explanation": "`predict_linear()` uses linear regression to extrapolate future metric values based on historical trends.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "cb63eeb8-9cc2-4b2d-813b-df72a4b6645d",
+      "text": "What does `without()` clause do in aggregation?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "2b4d7ae3-9ae6-4780-95eb-ad1fd4822488",
+          "label": "Excludes specified labels from grouping"
+        },
+        {
+          "id": "cb9b96ac-6adc-49e4-afb0-93f726e29fdd",
+          "label": "Includes only specified labels in grouping"
+        },
+        {
+          "id": "3b9ace82-06c1-471f-9725-9ca3f007db0c",
+          "label": "Removes metrics without specified labels"
+        },
+        {
+          "id": "152d4d7b-48d1-4e2d-862f-f05cfe5f27e4",
+          "label": "Filters out null values"
+        }
+      ],
+      "correctAnswers": [
+        "2b4d7ae3-9ae6-4780-95eb-ad1fd4822488"
+      ],
+      "explanation": "`without()` excludes the specified labels from aggregation grouping, keeping all other labels.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "c946a5ee-305b-4ac8-bc5f-9befc289d25c",
+      "text": "Complete the alert rule condition for disk space below 10%:",
+      "type": "CODE_COMPLETION",
+      "template": "`(node_filesystem_avail_bytes / node_filesystem_size_bytes) * 100 ____ 10`",
+      "gaps": [
+        "<"
+      ],
+      "correctAnswers": [
+        "<"
+      ],
+      "explanation": "Alert conditions use comparison operators. Here `< 10` triggers when available disk space percentage falls below 10%.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "a0078eba-a589-4983-8b40-ad6e3839d37a",
+      "text": "Which function should you use to fill gaps in sparse metrics?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "556285b1-292f-477d-ae76-3fc0d2b9eced",
+          "label": "`or`"
+        },
+        {
+          "id": "429983cf-ca99-41f8-88f8-96ad0a2e1843",
+          "label": "`unless`"
+        },
+        {
+          "id": "b4996c49-3011-441c-bcd8-7da4313a1209",
+          "label": "`and`"
+        },
+        {
+          "id": "e4f1dfc1-0911-4c68-9ec6-1e83eb4dd4ae",
+          "label": "`group_left`"
+        }
+      ],
+      "correctAnswers": [
+        "556285b1-292f-477d-ae76-3fc0d2b9eced"
+      ],
+      "explanation": "The `or` operator can fill gaps by providing fallback values: `metric or 0` returns 0 when metric has no data.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "c1a9fd1d-fbac-4daa-945f-632fb4deae83",
+      "text": "What is the purpose of the `group()` aggregation function?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "f377411f-64bf-41c4-8ccc-55b7e045febe",
+          "label": "Groups metrics by labels"
+        },
+        {
+          "id": "d0d2d2df-6fbf-413c-85b2-b3169ac5bc7c",
+          "label": "Returns 1 for each group, ignoring values"
+        },
+        {
+          "id": "21e1be4a-6b10-4fac-bbbf-883f7a45ea0f",
+          "label": "Combines multiple metrics"
+        },
+        {
+          "id": "3d93cefb-84bf-4600-b398-f4e1e905e56c",
+          "label": "Creates metric hierarchies"
+        }
+      ],
+      "correctAnswers": [
+        "d0d2d2df-6fbf-413c-85b2-b3169ac5bc7c"
+      ],
+      "explanation": "`group()` aggregation returns 1 for each group of time series, effectively counting unique label combinations while ignoring values.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "1f3d9395-a270-4db0-bc6e-b01454508de5",
+      "text": "Complete the query to get error rate as a percentage:",
+      "type": "CODE_COMPLETION",
+      "template": "`(rate(http_requests_total{status=~\"5..\"}[5m]) / ______(http_requests_total[5m])) * 100`",
+      "gaps": [
+        "rate"
+      ],
+      "correctAnswers": [
+        "rate"
+      ],
+      "explanation": "Error rate percentage = (error_requests_rate / total_requests_rate) * 100. Both numerator and denominator need the same `rate()` function.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "8c0feec0-409a-4faf-a9bc-c4fb488e02f5",
+      "text": "Which modifier allows one-to-many vector matching?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "1b4b514c-8992-416f-a048-2e97d1a19217",
+          "label": "`group_left`"
+        },
+        {
+          "id": "366f845e-08b2-496a-8e71-9f2f0a08116f",
+          "label": "`group_right`"
+        },
+        {
+          "id": "6b54ccee-e1ef-4e96-a773-ce99f913bcad",
+          "label": "`on`"
+        },
+        {
+          "id": "b1fe0fed-2f04-4504-8cb8-900d3d90b7b1",
+          "label": "`ignoring`"
+        }
+      ],
+      "correctAnswers": [
+        "366f845e-08b2-496a-8e71-9f2f0a08116f"
+      ],
+      "explanation": "`group_right` enables one-to-many matching where the right-hand side has multiple series matching each left-hand side series.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "784c90d7-3d54-4e2b-82b1-7ed2b5541cf2",
+      "text": "What does `resets()` function calculate?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "7927cb7a-791b-4be1-ad03-be7a7bca336d",
+          "label": "Number of counter resets in the time range"
+        },
+        {
+          "id": "728b882d-772a-49b1-93de-90d443cf2731",
+          "label": "Timestamp of last reset"
+        },
+        {
+          "id": "aa8c57d0-231d-4744-942b-6d20b572769e",
+          "label": "Rate at which resets occur"
+        },
+        {
+          "id": "870e9879-7f2e-44ba-8456-f885795f599f",
+          "label": "Time since last reset"
+        }
+      ],
+      "correctAnswers": [
+        "7927cb7a-791b-4be1-ad03-be7a7bca336d"
+      ],
+      "explanation": "`resets()` counts the number of times a counter metric has reset (decreased) within the specified time range.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "d39bd7b2-52cb-4447-9c7d-e3ee6a90dade",
+      "text": "Complete the query to find services with high memory usage (>80%):",
+      "type": "CODE_COMPLETION",
+      "template": "`(node_memory_used_bytes / node_memory_total_bytes) * 100 ____ 80`",
+      "gaps": [
+        ">"
+      ],
+      "correctAnswers": [
+        ">"
+      ],
+      "explanation": "Use the `>` operator to filter for memory usage percentage above 80%.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "06137083-f25d-4710-9c75-40aac8302669",
+      "text": "Which time function returns the current Unix timestamp?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "5f64e4cd-0c78-4759-bb8e-15b1dd4bd55a",
+          "label": "`time()`"
+        },
+        {
+          "id": "ea385f9a-8c97-4901-bbca-361fd40b028e",
+          "label": "`now()`"
+        },
+        {
+          "id": "6f8a1cb4-bb7d-4b4c-801f-1b188052d2a1",
+          "label": "`timestamp()`"
+        },
+        {
+          "id": "2a2f7194-549c-470d-b723-6e381af28e2e",
+          "label": "`current_time()`"
+        }
+      ],
+      "correctAnswers": [
+        "5f64e4cd-0c78-4759-bb8e-15b1dd4bd55a"
+      ],
+      "explanation": "`time()` returns the current Unix timestamp as a scalar value.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "0aff9406-5e22-4bd3-b3b1-b8991ac50953",
+      "text": "What is the difference between `sum()` and `sum_over_time()`?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "cbc92df8-3939-42ea-aaf4-14c5e94102c0",
+          "label": "`sum()` aggregates across series, `sum_over_time()` across time"
+        },
+        {
+          "id": "d1884278-3b06-4914-95bc-9d099b87bedd",
+          "label": "`sum()` works with ranges, `sum_over_time()` with instants"
+        },
+        {
+          "id": "6cbe9639-71fd-4ec9-bd90-d38bef311548",
+          "label": "They are identical functions"
+        },
+        {
+          "id": "25af7f30-e936-4c88-85f7-bed205c0b365",
+          "label": "`sum_over_time()` only works with counters"
+        }
+      ],
+      "correctAnswers": [
+        "cbc92df8-3939-42ea-aaf4-14c5e94102c0"
+      ],
+      "explanation": "`sum()` aggregates values across multiple time series at a single point in time, while `sum_over_time()` sums all samples in a range vector for each series.",
+      "difficulty": "ADVANCED"
+    },
+    {
+      "id": "93f38f99-1b45-4e50-a520-e9a507e47d6d",
+      "text": "Complete the subquery to get maximum CPU usage over 1 hour with 5-minute steps:",
+      "type": "CODE_COMPLETION",
+      "template": "`max_over_time(cpu_usage[____:____])`",
+      "gaps": [
+        "1h",
+        "5m"
+      ],
+      "correctAnswers": [
+        "1h",
+        "5m"
+      ],
+      "explanation": "Subquery syntax `[range:step]` where `1h` is the time range and `5m` is the evaluation step interval.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "53552199-4a62-4833-8b50-8cfce7eea362",
+      "text": "Which vector matching approach is preferred for generic recording rules?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "32a47b41-55e1-49e8-bb9e-3d709a6707ac",
+          "label": "`on()` clause"
+        },
+        {
+          "id": "49b15422-0508-4d5a-b034-2ffe15bfb2d8",
+          "label": "`ignoring()` clause"
+        },
+        {
+          "id": "0c125df6-32c9-472d-960d-e3b6535dc02c",
+          "label": "Both are equivalent"
+        },
+        {
+          "id": "591147d7-45b9-492b-bfa1-4f6a81656472",
+          "label": "Neither, use `group_left`"
+        }
+      ],
+      "correctAnswers": [
+        "49b15422-0508-4d5a-b034-2ffe15bfb2d8"
+      ],
+      "explanation": "`ignoring()` is preferred for reusable rules as it preserves more labels, making rules more generic and shareable across different contexts.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "74c235cd-c38a-40c2-828a-4ef36742149a",
+      "text": "What is the correct way to handle counter resets in custom rate calculations?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "44090bfb-abc7-4c42-a987-317d00719f69",
+          "label": "Use `resets()` function to detect and adjust"
+        },
+        {
+          "id": "dbd07f9e-04bf-4687-9294-c69d1d796cac",
+          "label": "Always use built-in `rate()` function"
+        },
+        {
+          "id": "b03bcd7b-c933-4e70-afc5-700cb6871e2b",
+          "label": "Ignore resets as they're rare"
+        },
+        {
+          "id": "fc99201b-d020-4ff8-8966-4202287eda20",
+          "label": "Use `increase()` instead"
+        }
+      ],
+      "correctAnswers": [
+        "dbd07f9e-04bf-4687-9294-c69d1d796cac"
+      ],
+      "explanation": "Always use the built-in `rate()` function as it properly handles counter resets automatically. Manual calculations are error-prone.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "0dd56f68-179e-4a15-97e9-75d525b49715",
+      "text": "Complete the complex aggregation to get P99 latency by service:",
+      "type": "CODE_COMPLETION",
+      "template": "`histogram_quantile(0.99, sum(______(http_request_duration_seconds_bucket[5m])) by (service, le))`",
+      "gaps": [
+        "rate"
+      ],
+      "correctAnswers": [
+        "rate"
+      ],
+      "explanation": "For histogram quantiles, use `rate()` on bucket counters, then aggregate by service and `le` label before applying `histogram_quantile()`.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "2cd99e95-948a-4247-b248-2f692a8e9e7b",
+      "text": "Which function helps identify when metrics stop being reported?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "77e9bd25-a053-42e7-92b7-05c831ad6049",
+          "label": "`absent_over_time()`"
+        },
+        {
+          "id": "7efc9e3f-68a0-4dc4-ae97-72f59602b213",
+          "label": "`present_over_time()`"
+        },
+        {
+          "id": "50bce1d0-7199-4bde-8549-ad0f4b58c6b8",
+          "label": "`last_over_time()`"
+        },
+        {
+          "id": "1790abb5-af13-4bed-a139-261bce7558e9",
+          "label": "`changes()`"
+        }
+      ],
+      "correctAnswers": [
+        "77e9bd25-a053-42e7-92b7-05c831ad6049"
+      ],
+      "explanation": "`absent_over_time()` returns 1 when no samples exist in the specified time range, useful for detecting when metrics stop reporting.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "1731abc5-f996-4809-b535-8785f037ed70",
+      "text": "What is the most efficient way to calculate CPU usage across multiple cores?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "bf589e65-95aa-4845-bf49-8a7bb3f63bd1",
+          "label": "Sum all cores then calculate rate"
+        },
+        {
+          "id": "56e53c8a-dc8b-4689-b1f6-56bde390d8e3",
+          "label": "Calculate rate per core then average"
+        },
+        {
+          "id": "38d9c120-e2be-448a-82a1-8f1975866e12",
+          "label": "Use recording rule with pre-aggregated data"
+        },
+        {
+          "id": "58e93ba4-9bec-4c5e-8cf6-971849ab7819",
+          "label": "Sample one core and extrapolate"
+        }
+      ],
+      "correctAnswers": [
+        "38d9c120-e2be-448a-82a1-8f1975866e12"
+      ],
+      "explanation": "Recording rules with pre-aggregated data provide the most efficient approach for frequently-accessed multi-core CPU calculations.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "c1aad0ca-cbcb-4cf9-800d-8e648291fd2e",
+      "text": "Complete the query to detect high cardinality metrics (>1000 series):",
+      "type": "CODE_COMPLETION",
+      "template": "`count by (__name__) ({__name__=~\".+\"}) ____ 1000`",
+      "gaps": [
+        ">"
+      ],
+      "correctAnswers": [
+        ">"
+      ],
+      "explanation": "This query counts time series per metric name and filters for those with more than 1000 series, helping identify cardinality issues.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "4eab0e6c-6f34-4972-b99f-56d03c506433",
+      "text": "Which approach correctly handles many-to-one metric joins with label conflicts?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "d02d6b43-2f88-4125-be9b-cf9b7d4b24cd",
+          "label": "Use `on()` with all common labels"
+        },
+        {
+          "id": "0430d0e8-2d44-4f4d-a64e-c086dee5f9db",
+          "label": "Use `ignoring()` with conflicting labels and `group_left()`"
+        },
+        {
+          "id": "055ab917-9034-407f-9bca-be80cca631a6",
+          "label": "Pre-aggregate to remove conflicts"
+        },
+        {
+          "id": "08efaf34-4150-4207-8c4e-dd2178b9c672",
+          "label": "Use separate queries and combine externally"
+        }
+      ],
+      "correctAnswers": [
+        "0430d0e8-2d44-4f4d-a64e-c086dee5f9db"
+      ],
+      "explanation": "Use `ignoring()` to exclude conflicting labels and `group_left()` to preserve additional labels from the right-hand side in many-to-one joins.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "3bb574c3-a39b-43c0-a56f-111cb13dc1d7",
+      "text": "What is the limitation of `predict_linear()` for capacity planning?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "83243768-9113-4c82-bb66-4ee8a3827428",
+          "label": "Only works with linear trends"
+        },
+        {
+          "id": "750b29cf-069b-49ab-9e82-646fe93c71f2",
+          "label": "Requires minimum 24 hours of data"
+        },
+        {
+          "id": "daa58468-ebc1-4111-8c4b-b0d1a572e174",
+          "label": "Cannot predict beyond 1 week"
+        },
+        {
+          "id": "d7f7431d-acd4-4a1f-a179-373d5542eecf",
+          "label": "Only works with counter metrics"
+        }
+      ],
+      "correctAnswers": [
+        "83243768-9113-4c82-bb66-4ee8a3827428"
+      ],
+      "explanation": "`predict_linear()` assumes linear trends and may not accurately predict metrics with seasonal patterns, exponential growth, or other non-linear behaviors.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "012a7a23-3f2b-4355-bfe5-1fdb2581cac9",
+      "text": "Complete the advanced alert for SLA violation (P95 latency > 500ms for 5 minutes):",
+      "type": "CODE_COMPLETION",
+      "template": "`histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[5m])) by (le)) ____ 0.5\nfor: ____`",
+      "gaps": [
+        ">",
+        "5m"
+      ],
+      "correctAnswers": [
+        ">",
+        "5m"
+      ],
+      "explanation": "SLA alerts should use appropriate thresholds (0.5 = 500ms) and duration (5m) to avoid false positives while catching genuine violations.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "52ea8386-181c-4bbe-b93d-b2c8adcd1c7d",
+      "text": "Which strategy best handles sparse metrics in dashboards?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "28f3cf5e-f367-4f4e-8028-568c3c06f2c6",
+          "label": "Use default values with `or` operator"
+        },
+        {
+          "id": "7b485337-51c9-4a34-ab48-74734e93ae71",
+          "label": "Increase scrape interval"
+        },
+        {
+          "id": "55bf3cd2-c48a-49d8-9792-cbb557b58113",
+          "label": "Use `absent()` to show missing data"
+        },
+        {
+          "id": "a711ee2e-c5e9-4c95-a711-4d90204f9cc4",
+          "label": "Filter out sparse metrics entirely"
+        }
+      ],
+      "correctAnswers": [
+        "28f3cf5e-f367-4f4e-8028-568c3c06f2c6"
+      ],
+      "explanation": "Using `metric or 0` provides sensible default values for sparse metrics, ensuring consistent dashboard visualization without gaps.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "07c79a76-acd9-4c1c-a536-f52c4169a219",
+      "text": "What is the recommended approach for cross-federation queries?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "db2c5681-f1dd-433d-94f1-3629b29c57bc",
+          "label": "Query each federation separately"
+        },
+        {
+          "id": "1d8ac6c3-690a-4662-9d32-8cee4303e4e8",
+          "label": "Use federation labels for filtering"
+        },
+        {
+          "id": "822ca777-77b5-42fc-8b7e-3eb1b89dc685",
+          "label": "Implement recording rules on each side"
+        },
+        {
+          "id": "5802c871-7d4a-4b5c-97b1-41d7225da6d9",
+          "label": "Disable federation for complex queries"
+        }
+      ],
+      "correctAnswers": [
+        "822ca777-77b5-42fc-8b7e-3eb1b89dc685"
+      ],
+      "explanation": "Recording rules on each federation side provide pre-aggregated data, reducing query complexity and improving performance for cross-federation scenarios.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "4dce559e-2f57-49b9-b31c-7d63893ed8dc",
+      "text": "Complete the memory leak detection query using derivative:",
+      "type": "CODE_COMPLETION",
+      "template": "`______(avg_over_time(process_resident_memory_bytes[1h])) > 1048576`",
+      "gaps": [
+        "deriv"
+      ],
+      "correctAnswers": [
+        "deriv"
+      ],
+      "explanation": "`deriv()` calculates the rate of change in memory usage; positive derivatives over time may indicate memory leaks (1048576 = 1MB/second).",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "dbcd22eb-e150-43f4-ba95-0ba4337a2c67",
+      "text": "Which histogram bucket configuration best captures request latency distribution?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "f86b2e03-c3f9-4b6b-b7e5-96e95071e642",
+          "label": "Linear buckets: 0.1, 0.2, 0.3, 0.4, 0.5s"
+        },
+        {
+          "id": "fba8a451-4b55-4be0-a140-6f5c8076c55d",
+          "label": "Exponential buckets: 0.01, 0.1, 1, 10s"
+        },
+        {
+          "id": "77ee8cd1-8375-4294-b76b-033e88702c3a",
+          "label": "Fixed buckets: 0.1, 0.5, 1.0s only"
+        },
+        {
+          "id": "ef34fa1f-91bd-4a7b-a6a6-cf459d42fe9b",
+          "label": "Single bucket: +Inf"
+        }
+      ],
+      "correctAnswers": [
+        "fba8a451-4b55-4be0-a140-6f5c8076c55d"
+      ],
+      "explanation": "Exponential buckets better capture wide latency distributions, providing good resolution for both fast and slow requests.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "3bea42fb-e23e-4ebc-9e6a-8bcb3a885652",
+      "text": "What causes 'many-to-many matching not allowed' errors?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "716f4af0-449b-4161-8598-9abfbfd795bb",
+          "label": "Missing group_left or group_right modifier"
+        },
+        {
+          "id": "06194455-2f4a-4d9a-9150-972b80e7d544",
+          "label": "Incorrect label matching syntax"
+        },
+        {
+          "id": "c63573f4-0b04-4052-b11c-01cad7b8aaf4",
+          "label": "Using arithmetic operators incorrectly"
+        },
+        {
+          "id": "7095ec5a-248b-4bb0-9086-33398ac7e773",
+          "label": "Time series without common labels"
+        }
+      ],
+      "correctAnswers": [
+        "716f4af0-449b-4161-8598-9abfbfd795bb"
+      ],
+      "explanation": "Many-to-many errors occur when both sides have multiple matching series. Use `group_left` or `group_right` to specify which side is the 'many' side.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "3a53d119-332d-4a57-a759-72050ba7ace3",
+      "text": "Complete the query to calculate network utilization percentage:",
+      "type": "CODE_COMPLETION",
+      "template": "`(rate(node_network_transmit_bytes_total[5m]) * 8) / ______ * 100`",
+      "gaps": [
+        "node_network_speed_bytes"
+      ],
+      "correctAnswers": [
+        "node_network_speed_bytes"
+      ],
+      "explanation": "Network utilization = (transmitted_bits_per_second / interface_speed_bits_per_second) * 100. Multiply bytes by 8 to get bits.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "e083d335-8a47-4f70-b849-7fd3d7b95004",
+      "text": "Which aggregation preserves the most information for later analysis?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "cd109e37-ab4a-4d9a-b8a2-7eab0e6ce962",
+          "label": "`sum()` for totals"
+        },
+        {
+          "id": "f9d11f12-bfec-4fd7-8977-187b88878236",
+          "label": "`avg()` for averages"
+        },
+        {
+          "id": "1d7d8876-8764-4ad5-ba0d-6ac8798e0d68",
+          "label": "`histogram_quantile()` for distributions"
+        },
+        {
+          "id": "9e4498d2-10af-4c14-8a01-c73e8a71d282",
+          "label": "Recording rule with multiple aggregations"
+        }
+      ],
+      "correctAnswers": [
+        "9e4498d2-10af-4c14-8a01-c73e8a71d282"
+      ],
+      "explanation": "Recording rules with multiple aggregation levels (sum, avg, quantiles) preserve the most information while providing efficient access to different views.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "f14e0e93-ad66-4a83-8c23-74f4d68d5657",
+      "text": "What is the correct way to handle timezone-aware queries?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "08fd4097-f971-46ec-9f6f-5c5dad1c0dab",
+          "label": "Use `@` modifier with timezone offset"
+        },
+        {
+          "id": "e5ad387e-c155-481c-b92a-0fed36a051a0",
+          "label": "Convert timestamps in recording rules"
+        },
+        {
+          "id": "a417eaaf-c6b0-40a6-8a78-d63bb5067533",
+          "label": "PromQL uses UTC only, handle in visualization"
+        },
+        {
+          "id": "9d7a400e-a9d8-42f1-bb50-68b716520525",
+          "label": "Use external time conversion functions"
+        }
+      ],
+      "correctAnswers": [
+        "a417eaaf-c6b0-40a6-8a78-d63bb5067533"
+      ],
+      "explanation": "PromQL operates in UTC only. Timezone handling should be done in visualization tools like Grafana, not in PromQL queries.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "4bf21303-0297-4e63-9bf6-13e38a741bed",
+      "text": "Complete the query to detect when error rate exceeds baseline by 3x:",
+      "type": "CODE_COMPLETION",
+      "template": "`rate(http_requests_total{status=~\"5..\"}[5m]) > ______ * avg_over_time(rate(http_requests_total{status=~\"5..\"}[5m])[24h:1h])`",
+      "gaps": [
+        "3"
+      ],
+      "correctAnswers": [
+        "3"
+      ],
+      "explanation": "This compares current error rate to 3x the 24-hour baseline average, detecting anomalous spikes above normal patterns.",
+      "difficulty": "EXPERT"
+    },
+    {
+      "id": "6269c93a-db09-4eba-b1b7-6f6b4a280064",
+      "text": "Which approach best handles high-cardinality label explosion?",
+      "type": "SINGLE_CHOICE",
+      "options": [
+        {
+          "id": "1e290e27-08f6-401c-b48b-9b00d61c8852",
+          "label": "Drop problematic labels in recording rules"
+        },
+        {
+          "id": "a9bcb0ac-03b4-4145-9b44-0214003570e0",
+          "label": "Hash high-cardinality labels to reduce uniqueness"
+        },
+        {
+          "id": "ea421322-653a-4370-9bb5-67702a433910",
+          "label": "Sample metrics to reduce volume"
+        },
+        {
+          "id": "db4cf46b-e226-4532-b6d4-63c915245866",
+          "label": "Use separate metric names for different cardinalities"
+        }
+      ],
+      "correctAnswers": [
+        "1e290e27-08f6-401c-b48b-9b00d61c8852"
+      ],
+      "explanation": "Recording rules that drop high-cardinality labels (like user_id, request_id) while preserving essential grouping labels provide the best balance of utility and performance.",
+      "difficulty": "EXPERT"
+    }
+  ]
+}

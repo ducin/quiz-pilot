@@ -1,0 +1,13 @@
+[
+    {
+        "id": "b1e7e2c2-1f2a-4c3e-9e2b-1a2b3c4d5e6f",
+        "name": "PromQL test",
+        "questionPool": "all",
+        "questions": {
+            "BASIC": 5,
+            "ADVANCED": 5,
+            "EXPERT": 5
+        },
+        "description": "A comprehensive test of your PromQL knowledge."
+    }
+]

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Developer Jutra: QuizPilot</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body data-color-scheme="dark">
+    <div class="container">
+        <header class="app-header">
+            <div class="header-top">
+                <h1>Developer Jutra: QuizPilot</h1>
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <span class="theme-icon light-icon">☀️</span>
+                    <span class="theme-icon dark-icon">🌙</span>
+                </button>
+            </div>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+                <span class="progress-text" id="progressText">Question 1 of 20</span>
+            </div>
+        </header>
+
+        <main class="app-main">
+            <!-- Welcome Page -->
+            <div class="welcome-container card" id="welcomeContainer">
+                <div class="card__body">
+                    <p class="welcome-instruction">Select a test to run.</p>
+                    <div id="loadingSpinner" style="display: flex; justify-content: center; align-items: center; margin: 32px 0;">
+                        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Loading">
+                            <circle cx="24" cy="24" r="20" stroke="#21A0B5" stroke-width="6" opacity="0.2"/>
+                            <path d="M44 24a20 20 0 1 1-20-20" stroke="#21A0B5" stroke-width="6" stroke-linecap="round">
+                                <animateTransform attributeName="transform" type="rotate" from="0 24 24" to="360 24 24" dur="1s" repeatCount="indefinite"/>
+                            </path>
+                        </svg>
+                    </div>
+                    <div id="testList" class="test-list"></div>
+                    <button class="btn btn--primary" id="startTestBtn" disabled>Start Test</button>
+                </div>
+            </div>
+
+            <!-- Test Execution Summary Sidebar -->
+            <aside class="execution-summary card" id="executionSummary" style="display: none;">
+                <div class="card__body">
+                    <h3>Test History</h3>
+                    <div id="executionHistoryList"></div>
+                </div>
+            </aside>
+
+            <!-- Question Display -->
+            <div class="question-container card" id="questionContainer" style="display: none;">
+                <div class="card__body">
+                    <div class="question-header">
+                        <span class="difficulty-badge" id="difficultyBadge"></span>
+                        <span class="question-type" id="questionType"></span>
+                    </div>
+                    
+                    <h2 class="question-text" id="questionText"></h2>
+                    
+                    <!-- Single Choice Questions -->
+                    <div class="answer-options" id="singleChoiceOptions" style="display: none;">
+                        <div class="radio-group" role="radiogroup" aria-labelledby="questionText">
+                        </div>
+                    </div>
+                    
+                    <!-- Multiple Choice Questions -->
+                    <div class="answer-options" id="multipleChoiceOptions" style="display: none;">
+                        <div class="checkbox-group" role="group" aria-labelledby="questionText">
+                        </div>
+                    </div>
+                    
+                    <!-- Code Completion Questions -->
+                    <div class="answer-options" id="codeCompletionOptions" style="display: none;">
+                        <div class="code-template">
+                            <pre><code id="codeTemplate"></code></pre>
+                        </div>
+                        <div class="code-inputs" id="codeInputs">
+                        </div>
+                    </div>
+                    
+                    <!-- Feedback Section -->
+                    <div class="feedback-section" id="feedbackSection" style="display: none;">
+                        <div class="feedback-result" id="feedbackResult"></div>
+                        <div class="explanation" id="explanation"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Navigation Controls -->
+            <div class="navigation-controls" id="navigationControls" style="display: none;">
+                <button class="btn btn--secondary" id="prevBtn" disabled>
+                    <span aria-hidden="true">←</span>&nbsp;Previous
+                </button>
+                
+                <div class="nav-buttons">
+                    <button class="btn btn--primary" id="submitBtn">Submit</button>
+                    <button class="btn btn--outline" id="nextBtn" style="display: none;">Next</button>
+                </div>
+            </div>
+
+            <!-- Final Summary -->
+            <div class="summary-container card" id="summaryContainer" style="display: none;">
+                <div class="card__body">
+                    <h2>Test Complete!</h2>
+                    
+                    <div class="score-summary">
+                        <div class="total-score">
+                            <h3>Your Score: <span id="totalScore"></span></h3>
+                        </div>
+                        
+                        <div class="difficulty-breakdown">
+                            <h4>Score by Difficulty:</h4>
+                            <div class="breakdown-grid">
+                                <div class="difficulty-item">
+                                    <span class="difficulty-label">Basic:</span>
+                                    <span id="basicScore" class="score-value"></span>
+                                </div>
+                                <div class="difficulty-item">
+                                    <span class="difficulty-label">Advanced:</span>
+                                    <span id="advancedScore" class="score-value"></span>
+                                </div>
+                                <div class="difficulty-item">
+                                    <span class="difficulty-label">Expert:</span>
+                                    <span id="expertScore" class="score-value"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="missed-questions" id="missedQuestions">
+                        <h4>Review Missed Questions:</h4>
+                        <div id="missedQuestionsList"></div>
+                    </div>
+                    
+                    <button class="btn btn--primary" id="restartBtn" onclick="location.reload()">
+                        Start Over
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="randomizer.js"></script>
+    <!-- <script src="data.js"></script> -->
+    <script src="app.js"></script>
+</body>
+</html>

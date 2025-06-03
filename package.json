@@ -1,0 +1,8 @@
+{
+  "name": "QuizPilot",
+  "author": "Developer Jutra",
+  "private": true,
+  "dependencies": {
+    "uuid": "^11.1.0"
+  }
+}
